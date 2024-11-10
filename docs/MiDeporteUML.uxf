@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>320</y>
+      <w>240</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Reserva
+--
++ id: Integer {PK, unique}
++ inicio: Datetime {NotNull}
++ fin: Datetime {NotNull}
++ estado: enum
++ CanceladaATiempo: Boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>560</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Instalación
+--
++ id: Integer {PK, unique}
++ nombre: String {NotBlank}
++ tipo: enum {NotNull}
++ disponibilidad: Boolean {NotNull}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>70</y>
+      <w>240</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Usuario
+--
++ id: Integer {PK, Unique}
++ DNI: String {NotBlank, Unique}
++ Suspensión: Boolean {NotNull}
+/ NumReservas: Integer
+/ NumCancelaciones: Integer
+/ NumCancelacionesTardias: Integer
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>210</y>
+      <w>70</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=*
+m2=1
+Crea v</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>440</y>
+      <w>90</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+Implica v</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>560</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumerate&gt;&gt;
+TipoInstalación
+--
+Piscina
+Pádel
+Fútbol
+Baloncesto</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>320</y>
+      <w>240</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumerate&gt;&gt;
+EstadoReserva
+--
+Programada
+Finalizada
+Cancelada</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

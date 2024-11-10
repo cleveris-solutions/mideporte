@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>120</x>
+      <y>180</y>
+      <w>260</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Habitante
+--
++ id: Integer {PK, Unique}
++ DNI: String {NotBlank, Unique}
++ nombre: String {NotBlank}
++ apellidos: String {NotBlank}
++ dirección: String {NotBlank}
++ eMail: String {Email}
++ teléfono: Integer
++ fechaNacimineto: Date {NotNull}</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
