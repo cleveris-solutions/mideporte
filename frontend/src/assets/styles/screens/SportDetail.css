@@ -1,0 +1,38 @@
+.sport-detail-container {
+    display: flex;
+    gap: 50px;
+    padding-top: 10vh;
+    padding: 5rem 5rem;
+
+    /* justify-content: center; */
+}
+
+.form-section {
+    display: flex;
+    /* flex-direction: column; */
+    gap: 20px;
+}
+
+.sport-header h1 {
+    font-size: 3rem;
+    margin: 0;;
+}
+
+
+.add-to-cart-button {
+    background-color: var(--main-blue);
+    color: white;
+    padding: 0.5rem 1.4rem;
+    border-radius: 10px;
+    border: none;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+}
+  
+.add-to-cart-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease; 
+}
+  
+

@@ -1,0 +1,32 @@
+
+.schedule-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.hour-button {
+    padding: 2px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.hour-button.available {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+.hour-button.unavailable {
+    background-color: #dcdcdc;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.hour-button.selected {
+    background-color: var(--main-blue);
+    color: #fff;
+}

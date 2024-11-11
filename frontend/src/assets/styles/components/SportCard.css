@@ -1,0 +1,46 @@
+.card-container {
+    display: flex;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    background-color: var(--light-blue);
+    text-decoration: none;
+}
+
+.hover-effect:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+.sport-image {
+    width: 380px;
+    height: 240px;
+    object-fit: cover; 
+}
+
+.card-content {
+    padding: 16px;
+    height: 150px;
+}
+
+.sport-title {
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.sport-description {
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--main-blue);
+    margin: 8px 0 0;
+}
+
+.sport-message {
+    color: #5c5c5c;
+}
+
