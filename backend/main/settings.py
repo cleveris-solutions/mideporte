@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     # Third party (by us)
     'corsheaders',
     'rest_framework',
-    'bookings',
     'drf_spectacular',
+
+    # Our apps
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -110,6 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# User model
+AUTH_USER_MODEL = 'user.User'
+
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -125,9 +130,13 @@ REST_FRAMEWORK = {
 
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
 
 }
 
