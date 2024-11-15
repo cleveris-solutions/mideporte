@@ -1,0 +1,22 @@
+[
+    {
+        "model": "user.user",
+        "pk": 1,
+        "fields": {
+            "DNI": "12345678B",
+            "password": "pbkdf2_sha256$260000$examplehashedpassword1",
+            "suspended": false,
+            "is_staff": false
+        }
+    },
+    {
+        "model": "user.user",
+        "pk": 2,
+        "fields": {
+            "DNI": "98765432A",
+            "password": "pbkdf2_sha256$260000$examplehashedpassword2",
+            "suspended": false,
+            "is_staff": true
+        }
+    }
+]
