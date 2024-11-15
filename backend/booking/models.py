@@ -7,7 +7,7 @@ class BookingStatus(models.TextChoices):
 
 class Booking(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey('user.User', on_delete=models.CASCADE)
+    user_id = models.ForeignKey('user.User', on_delete=models.CASCADE, to_field='DNI')
     instalation_id = models.ForeignKey('installation.Installation', on_delete=models.CASCADE)
     start = models.DateTimeField(null=False)
     end = models.DateTimeField(null=False)
