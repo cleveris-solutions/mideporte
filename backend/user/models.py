@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
         return self.create_user(DNI, email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
-    DNI = models.CharField(max_length=9, unique=True, null=False, validators=[validate_dni])
+    DNI = models.CharField(max_length=9, unique=True, null=False, validators=[validate_dni], primary_key=True)
     password = models.CharField(max_length=128, null=True)
     suspended = models.BooleanField(default=False, null=False)
     is_staff = models.BooleanField(default=False, null=False)
