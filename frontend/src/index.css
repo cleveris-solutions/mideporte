@@ -15,4 +15,6 @@ code {
 :root {
   --main-blue: #5B89D5;
   --light-blue: #deeaff; 
+  --light-grey: #e5e5e5;
+  --dark-grey: #333;
 }
