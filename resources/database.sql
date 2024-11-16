@@ -1,12 +1,13 @@
---Drop database if exists
+-- Drop databases if they exist
 DROP DATABASE IF EXISTS mideportedb;
 DROP DATABASE IF EXISTS mideportedb_test;
 
--- Create database
+-- Create databases
 CREATE DATABASE mideportedb;
 CREATE DATABASE mideportedb_test;
 
--- Create user and password
+-- Drop user if exists and create new one
+DROP USER IF EXISTS 'mideporte_user'@'localhost';
 CREATE USER 'mideporte_user'@'localhost' IDENTIFIED BY 'mideporte_password';
 
 -- Set privileges over databases
