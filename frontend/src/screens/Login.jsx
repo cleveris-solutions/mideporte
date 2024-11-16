@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import './../assets/styles/screens/Login.css';
+import { AuthContext } from './../auth/AuthContext';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
     const [code, setCode] = useState('');
     const [error, setError] = useState('');
+
+    const { login } = useContext(AuthContext)
+    const backendURL = process.env.REACT_APP_BACKEND_URL;
     
     const handleSubmit = async (e) => {
         e.preventDefault();
     
     try {
         // TODO: Add the URL of the backend
-        const response = await fetch('', {
+        const response = await fetch(`${backendURL}/api/v1/user/validate-login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,11 +27,21 @@ const Login = ({ onLogin }) => {
         }
 
         const data = await response.json();
-        onLogin(data); 
+        login(data); 
     } catch (err) {
         setError(err.message);
     }
     };
+
+    const handleSubmitTemporary = (e) => {
+        e.preventDefault();
+
+        setTimeout(() => {
+            const simulatedResponse = { user: { name: 'Javier Santos', dni: code } };
+            login(simulatedResponse); 
+        }, 500); 
+    };
+    
 
     return(
         <div className="login-container">
@@ -43,7 +57,7 @@ const Login = ({ onLogin }) => {
             </div>
 
             <div className="login-form">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmitTemporary}>
                     <h3>Introduzca su DNI:</h3>
                     <input
                         type="text"
