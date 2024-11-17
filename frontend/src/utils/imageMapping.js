@@ -4,7 +4,7 @@ import padel_image from './../assets/images/padel.png';
 import piscina_image from './../assets/images/piscina.png';
 
 export const sportImages = {
-    'Padel': padel_image,
+    'Pádel': padel_image,
     'Fútbol': futbol_image,
     'Baloncesto': baloncesto_image,
     'Piscina': piscina_image
