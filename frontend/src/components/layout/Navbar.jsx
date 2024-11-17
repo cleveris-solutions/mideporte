@@ -20,12 +20,9 @@ const Navbar = () => {
         <li>
           <Link to="/reservas">Reservas</Link>
         </li>
-        <li>
-          <Link to="/perfil">Perfil</Link>
-        </li>
-        <li className="cart-container">
-          <Link to="/cesta">
-            <span className="cart-highlight">Cesta</span>
+        <li className="navbar-main-container">
+          <Link to="/perfil">
+            <span className="navbar-main-highlight">Perfil</span>
           </Link>
         </li>
       </ul>
