@@ -21,8 +21,8 @@ const SportDetail = () => {
     const sport = {sportName: sportName, description: 'Pista para 4 personas', message: null};
 
     // Not implemented yet. Need some backend logic to realize how its gonna work
-    const handleAddToCart = () => {
-        console.log('Added to cart');
+    const handleBook = () => {
+        console.log('Booked');
     }
 
     return (
@@ -62,7 +62,7 @@ const SportDetail = () => {
                         </div>
                     )}
                 </div>
-                <button className="add-to-cart-button" onClick={handleAddToCart}>Add to cart</button>
+                <button className="add-to-cart-button" onClick={handleBook}>Reservar</button>
             </div>
         </div>
 

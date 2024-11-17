@@ -7,30 +7,29 @@ const Login = () => {
     const [error, setError] = useState('');
 
     const { login } = useContext(AuthContext)
-    const backendURL = process.env.REACT_APP_BACKEND_URL;
     
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-    try {
-        // TODO: Add the URL of the backend
-        const response = await fetch(`${backendURL}/api/v1/user/validate-login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ code }),
-        });
+        try {
+            // TODO: Add the URL of the backend
+            const response = await fetch(`/api/v1/user/validate-login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code }),
+            });
 
-        if (!response.ok) {
-            throw new Error('Invalid code');
+            if (!response.ok) {
+                throw new Error('Invalid code');
+            }
+
+            const data = await response.json();
+            login(data); 
+        } catch (err) {
+            setError(err.message);
         }
-
-        const data = await response.json();
-        login(data); 
-    } catch (err) {
-        setError(err.message);
-    }
     };
 
     const handleSubmitTemporary = (e) => {

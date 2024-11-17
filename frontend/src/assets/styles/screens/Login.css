@@ -20,9 +20,9 @@
     height: 45px;
     padding: 10px;
     border-radius: 10px;
-    background-color: var(--light-grey);
-    border: 2px solid var(--light-grey);
-    color: var(--dark-grey);
+    background-color: var(--light-gray);
+    border: 2px solid var(--light-gray);
+    color: var(--dark-gray);
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s;
