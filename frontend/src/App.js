@@ -5,6 +5,7 @@ import Navbar from './components/layout/Navbar';
 import Home from './screens/Home';
 import SportDetail from './screens/SportDetail';
 import Login from './screens/Login';
+import BookingsList from './screens/BookingsList';
 import { useContext } from 'react';
 import { AuthContext } from './auth/AuthContext'; 
 
@@ -30,6 +31,7 @@ function App() {
       ) : (
         <Routes>
           <Route path="*" element={<Login />} />
+          <Route path="/reservas" element={<BookingsList />} />
         </Routes>
       )}
       <Footer />

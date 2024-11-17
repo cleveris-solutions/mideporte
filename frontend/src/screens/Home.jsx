@@ -10,7 +10,7 @@ const Home = () => {
     
     useEffect(() => {
 		// TODO: Fetch data from API :D
-        const sport1 = { sportName: 'Padel', description: 'Pista para 4 personas', message: null };
+        const sport1 = { sportName: 'Pádel', description: 'Pista para 4 personas', message: null };
         const sport2 = { sportName: 'Fútbol', description: 'Pista para 14 personas', message: 'Tienes una pista reservada.' };
         const sport3 = { sportName: 'Baloncesto', description: 'Pista para 10 personas', message: null };
         const sport4 = { sportName: 'Piscina', description: '2 calles individuales', message: null };

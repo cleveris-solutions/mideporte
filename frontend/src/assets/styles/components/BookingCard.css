@@ -1,0 +1,58 @@
+.booking-card-container {
+    display: flex;
+    width: 100%;
+    
+}
+
+.booking-card {
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--light-blue);
+    text-decoration: none;
+    width: 100%;
+    max-width: 100%;
+}
+
+.hover-effect:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.booking-image {
+    width: 20rem;
+    height: 140px;
+    object-fit: cover; 
+}
+
+.card-content {
+    padding: 16px;
+    height: 150px;
+}
+
+.booking-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px;
+}
+
+.booking-details h3 {
+    margin: 0;
+    font-size: 1.7rem;
+    color: #333;
+}
+
+.booking-details p {
+    margin: 0.5rem 0;
+    color: #5b89d5;
+    font-size: 1.1rem;
+    font-weight: normal;
+}
+
+.booking-date {
+    color: #5c5a5a;
+    font-size: 1.2em;
+    font-weight: bold;
+}
