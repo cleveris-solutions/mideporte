@@ -25,13 +25,13 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/deportes/:sportName" element={<SportDetail />} />
+              <Route path="/reservas" element={<BookingsList />} />
             </Routes>
           </div>
         </>
       ) : (
         <Routes>
           <Route path="*" element={<Login />} />
-          <Route path="/reservas" element={<BookingsList />} />
         </Routes>
       )}
       <Footer />
