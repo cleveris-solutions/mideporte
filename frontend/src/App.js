@@ -1,13 +1,14 @@
+import { useContext } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+import { AuthContext } from './auth/AuthContext';
 import Footer from './components/layout/Footer';
 import Navbar from './components/layout/Navbar';
-import Home from './screens/Home';
-import SportDetail from './screens/SportDetail';
-import Login from './screens/Login';
 import BookingsList from './screens/BookingsList';
-import { useContext } from 'react';
-import { AuthContext } from './auth/AuthContext'; 
+import Home from './screens/Home';
+import Login from './screens/Login';
+import SportDetail from './screens/SportDetail';
+import Profile from './screens/Profile';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -23,9 +24,10 @@ function App() {
           <div className="content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/home" element={<Home />} />
+              <Route path="/deportes" element={<Home />} />
               <Route path="/deportes/:sportName" element={<SportDetail />} />
               <Route path="/reservas" element={<BookingsList />} />
+              <Route path="/perfil" element={<Profile />} />
             </Routes>
           </div>
         </>

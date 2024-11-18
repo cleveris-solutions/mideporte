@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-// import { AuthContext } from './../auth/AuthContext';
 import './../assets/styles/screens/BookingsList.css';
-import { sportImages } from './../utils/imageMapping';
 import BookingCard from './../components/BookingCard';
-import { Link } from 'react-router-dom';
+import { sportImages } from './../utils/imageMapping';
 
 const BookingsList = () => {
   const [bookings, setBookings] = useState([]);
