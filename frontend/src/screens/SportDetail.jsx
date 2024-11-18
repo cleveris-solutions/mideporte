@@ -14,6 +14,8 @@ const SportDetail = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedSchedule, setSelectedSchedule] = useState(null);
     const [selectedLane, setSelectedLane] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [error, setError] = useState('');
     
     const { sportName } = useParams();
     
@@ -62,7 +64,27 @@ const SportDetail = () => {
                         </div>
                     )}
                 </div>
-                <button className="add-to-cart-button" onClick={handleBook}>Reservar</button>
+                <button className="add-to-cart-button" onClick={() => {setIsModalOpen(true)}}>Reservar</button>
+
+                {isModalOpen && (
+                // TODO: Fix Footer background color
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h4>¿Quiere confirmar la reserva?</h4>
+                        {error && <p className="error-message">{error}</p>}
+                        <div className="modal-buttons">
+                            <button className="cancel-button" onClick={() => setIsModalOpen(false)}>
+                                Cancelar
+                            </button>
+
+                            <button className="confirm-button blue" onClick={handleBook}>
+                                Confirmar
+                            </button>
+                        </div>
+                    </div>
+                </div>  
+                )}
+
             </div>
         </div>
 
