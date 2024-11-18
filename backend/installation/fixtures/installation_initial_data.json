@@ -1,0 +1,38 @@
+[
+    {
+        "model": "installation.installation",
+        "pk": 1,
+        "fields": {
+            "name": "Piscina Municipal",
+            "type": "Piscina",
+            "availability": true
+        }
+    },
+    {
+        "model": "installation.installation",
+        "pk": 2,
+        "fields": {
+            "name": "Pista de Pádel 1",
+            "type": "Pádel",
+            "availability": true
+        }
+    },
+    {
+        "model": "installation.installation",
+        "pk": 3,
+        "fields": {
+            "name": "Campo de Fútbol",
+            "type": "Fútbol",
+            "availability": true
+        }
+    },
+    {
+        "model": "installation.installation",
+        "pk": 4,
+        "fields": {
+            "name": "Pista de Baloncesto",
+            "type": "Baloncesto",
+            "availability": false
+        }
+    }
+]
