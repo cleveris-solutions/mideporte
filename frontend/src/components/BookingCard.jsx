@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './../assets/styles/components/BookingCard.css';
+import './../assets/styles/modal.css';
 
 const BookingCard = ({bookingId, sport, details, date, image }) => {
 
@@ -58,7 +59,7 @@ const BookingCard = ({bookingId, sport, details, date, image }) => {
                                 No, mantener reserva
                             </button>
 
-                            <button className="confirm-button" onClick={handleCancel}>
+                            <button className="confirm-button red" onClick={handleCancel}>
                                 Sí, cancelar
                             </button>
                         </div>
