@@ -7,9 +7,12 @@ from user.models import User
 from installation.models import Installation
 from rest_framework.decorators import api_view
 from drf_spectacular.utils import extend_schema,OpenApiParameter,OpenApiExample,OpenApiTypes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
 @extend_schema()
 @require_http_methods(["POST"])
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def create_booking(request):
     data = json.loads(request.body)
     user = data['user_id']

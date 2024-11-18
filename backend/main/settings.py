@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Third party (by us)
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_spectacular',
 
     # Our apps
@@ -135,6 +136,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
