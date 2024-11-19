@@ -8,6 +8,7 @@ from rest_framework.decorators import permission_classes
 
 INSTALLATION_NOT_FOUND_MSG = 'Installation not found'
 ERROR_KEY = 'error'
+INVALID_DATE_FORMAT_MSG = 'Invalid date format'
 
 @require_http_methods(["GET"])
 @permission_classes([IsAuthenticated])
@@ -22,7 +23,11 @@ def available_schedule(request, installation_id, date):
     except Installation.DoesNotExist:
         return JsonResponse({ERROR_KEY: INSTALLATION_NOT_FOUND_MSG}, status=404)
 
-    date = datetime.strptime(date, '%Y-%m-%d').date()
+    try:
+        date = datetime.strptime(date, '%Y-%m-%d').date()
+    except ValueError:
+        return JsonResponse({ERROR_KEY: INVALID_DATE_FORMAT_MSG}, status=400)
+    
     available_hours = installation.get_available_hours(date)
     
     hourly_slots = []

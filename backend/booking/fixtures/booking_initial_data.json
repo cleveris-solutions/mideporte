@@ -3,10 +3,9 @@
         "model": "booking.booking",
         "pk": 1,
         "fields": {
-            "user": 1,
+            "user": "12345678B",
             "installation": 1,
             "start": "2023-10-01T09:00:00Z",
-            "end": "2023-10-01T10:00:00Z",
             "cancelled": false,
             "status": "Programada"
         }
@@ -15,10 +14,9 @@
         "model": "booking.booking",
         "pk": 2,
         "fields": {
-            "user": 2,
+            "user": "98765432A",
             "installation": 2,
             "start": "2023-10-01T10:00:00Z",
-            "end": "2023-10-01T11:00:00Z",
             "cancelled": false,
             "status": "Programada"
         }
@@ -27,10 +25,9 @@
         "model": "booking.booking",
         "pk": 3,
         "fields": {
-            "user": 3,
+            "user": "12345678B",
             "installation": 3,
             "start": "2023-10-01T11:00:00Z",
-            "end": "2023-10-01T12:00:00Z",
             "cancelled": true,
             "status": "Cancelada"
         }
@@ -39,10 +36,9 @@
         "model": "booking.booking",
         "pk": 4,
         "fields": {
-            "user": 4,
+            "user": "98765432A",
             "installation": 4,
             "start": "2023-10-01T12:00:00Z",
-            "end": "2023-10-01T13:00:00Z",
             "cancelled": false,
             "status": "Finalizada"
         }
