@@ -1,11 +1,48 @@
 [
     {
+        "model": "installation.installationtype",
+        "pk": 1,
+        "fields": {
+            "name": "Piscina",
+            "description": "Piscina municipal de verano",
+            "image": "installation_types/swim.png"
+        }
+    },
+    {
+        "model": "installation.installationtype",
+        "pk": 2,
+        "fields": {
+            "name": "Pádel",
+            "description": "Pista de pádel cubierta",
+            "image": "installation_types/padel.png"
+        }
+    },
+    {
+        "model": "installation.installationtype",
+        "pk": 3,
+        "fields": {
+            "name": "Fútbol",
+            "description": "Campo de fútbol de césped natural",
+            "image": "installation_types/football.png"
+        }
+    },
+    {
+        "model": "installation.installationtype",
+        "pk": 4,
+        "fields": {
+            "name": "Baloncesto",
+            "description": "Pista de baloncesto al aire libre",
+            "image": "installation_types/basketball.png"
+        }
+    },
+    {
         "model": "installation.installation",
         "pk": 1,
         "fields": {
             "name": "Piscina Municipal",
-            "type": "Piscina",
-            "availability": true
+            "type": "1",
+            "availability": true,
+            "description": "Piscina municipal de verano"
         }
     },
     {
@@ -13,8 +50,9 @@
         "pk": 2,
         "fields": {
             "name": "Pista de Pádel 1",
-            "type": "Pádel",
-            "availability": true
+            "type": 2,
+            "availability": true,
+            "description": "Pista de pádel cubierta"
         }
     },
     {
@@ -22,8 +60,9 @@
         "pk": 3,
         "fields": {
             "name": "Campo de Fútbol",
-            "type": "Fútbol",
-            "availability": true
+            "type": 3,
+            "availability": true,
+            "description": "Campo de fútbol de césped natural"
         }
     },
     {
@@ -31,8 +70,9 @@
         "pk": 4,
         "fields": {
             "name": "Pista de Baloncesto",
-            "type": "Baloncesto",
-            "availability": false
+            "type": 4,
+            "availability": false,
+            "description": "Pista de baloncesto al aire libre"
         }
     }
 ]
