@@ -4,16 +4,16 @@ from datetime import datetime, date, timedelta
 
 DAYS_OF_WEEK = [(day,day) for day in calendar.day_name]
 
-class InstallationType(models.TextChoices):
-    SWIMMING_POOL = 'Piscina'
-    PADEL = 'Pádel'
-    FOOTBALL = 'Fútbol'
-    BASKETBALL = 'Baloncesto'
+class InstallationType(models.Model):
+    name = models.CharField(max_length=50, blank=False)
+    description = models.TextField(max_length=500, blank=False)
+    image = models.ImageField(upload_to='installation_types', blank=True)
+
 
 class Installation(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=255, blank=False)
-    type = models.CharField(max_length=50, choices=InstallationType.choices, blank=False)
+    type = models.ForeignKey(InstallationType, on_delete=models.PROTECT, related_name='installations')
     description = models.TextField(max_length=500, blank=True)
     availability = models.BooleanField(null=False)
     
