@@ -14,7 +14,6 @@ Booking
 --
 + id: Integer {PK, unique}
 + start: Datetime {NotNull}
-+ end: Datetime {NotNull}
 + status: enum {NotNull}
 + cancelled: Boolean</panel_attributes>
     <additional_attributes/>
