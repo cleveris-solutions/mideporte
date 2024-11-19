@@ -43,7 +43,7 @@ Installation
       <x>70</x>
       <y>10</y>
       <w>240</w>
-      <h>150</h>
+      <h>160</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 User
@@ -62,15 +62,15 @@ User
     <id>Relation</id>
     <coordinates>
       <x>180</x>
-      <y>150</y>
+      <y>160</y>
       <w>70</w>
-      <h>130</h>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=*
 m2=1
 Crea v</panel_attributes>
-    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
@@ -89,18 +89,18 @@ Implica v</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
+      <x>470</x>
       <y>500</y>
       <w>240</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>&lt;&lt;Enumerate&gt;&gt;
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
 InstallationType
 --
-Piscina
-Pádel
-Fútbol
-Baloncesto</panel_attributes>
++ id: Integer {PK, unique}
++ name: String {NotBlank}
++ description: String {NotBlank}
++ image: String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -149,5 +149,19 @@ AvailableHour
 + start_time: enum {NotNull}
 + end_time: Boolean {NotNull}</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>300</x>
+      <y>540</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=*
+Pertecene a &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
   </element>
 </diagram>
