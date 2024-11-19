@@ -14,6 +14,7 @@ class Installation(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     name = models.CharField(max_length=255, blank=False)
     type = models.CharField(max_length=50, choices=InstallationType.choices, blank=False)
+    description = models.TextField(max_length=500, blank=True)
     availability = models.BooleanField(null=False)
     
     # Returns a list of hourly slots available for a specific date

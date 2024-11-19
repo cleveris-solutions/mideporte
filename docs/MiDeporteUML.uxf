@@ -1,17 +1,51 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>70</x><y>360</y><w>240</w><h>130</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>260</y>
+      <w>240</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Booking
 --
 + id: Integer {PK, unique}
 + start: Datetime {NotNull}
 + end: Datetime {NotNull}
 + status: enum {NotNull}
-+ cancelled: Boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>600</y><w>240</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
++ cancelled: Boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>500</y>
+      <w>240</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Installation
 --
 + id: Integer {PK, unique}
 + name: String {NotBlank}
 + type: enum {NotNull}
-+ availability: Boolean {NotNull}</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>110</y><w>240</w><h>150</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
++ description: String {NotBlank}
++ availability: Boolean {NotNull}</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>10</y>
+      <w>240</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
 User
 --
 + id: Integer {PK, Unique}
@@ -21,30 +55,99 @@ User
 / bookingsNumber: Integer
 / cancellationsNumber: Integer
 / lateCancellationsNumber: Integer
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>250</y><w>70</w><h>130</h></coordinates><panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>150</y>
+      <w>70</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-
 m1=*
 m2=1
-Crea v</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>480</y><w>80</w><h>140</h></coordinates><panel_attributes>lt=-
+Crea v</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>380</y>
+      <w>90</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
 m1=1
 m2=*
-Implica v</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>350</x><y>600</y><w>240</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Enumerate&gt;&gt;
+Implica v</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>500</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumerate&gt;&gt;
 InstallationType
 --
 Piscina
 Pádel
 Fútbol
-Baloncesto</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>350</x><y>360</y><w>240</w><h>100</h></coordinates><panel_attributes>&lt;&lt;Enumerate&gt;&gt;
+Baloncesto</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>350</x>
+      <y>260</y>
+      <w>240</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enumerate&gt;&gt;
 BookingStatus
 --
 Programada
 Finalizada
-Cancelada</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>170</x><y>710</y><w>110</w><h>150</h></coordinates><panel_attributes>lt=-
+Cancelada</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>620</y>
+      <w>120</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
 m1=1
 m2=*
-Dispone de v</panel_attributes><additional_attributes>10;10;10;130</additional_attributes></element><element><id>UMLClass</id><coordinates><x>70</x><y>840</y><w>240</w><h>120</h></coordinates><panel_attributes>&lt;&lt;Entity&gt;&gt;
+Dispone de v</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>740</y>
+      <w>240</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
 AvailableHour
 --
 + id: Integer {PK, unique}
 + day_of_week: String {NotBlank}
 + start_time: enum {NotNull}
-+ end_time: Boolean {NotNull}</panel_attributes><additional_attributes></additional_attributes></element></diagram>
++ end_time: Boolean {NotNull}</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

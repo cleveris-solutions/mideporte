@@ -5,7 +5,8 @@
         "fields": {
             "name": "Piscina Municipal",
             "type": "Piscina",
-            "availability": true
+            "availability": true,
+            "description": "Piscina municipal de verano"
         }
     },
     {
@@ -14,7 +15,8 @@
         "fields": {
             "name": "Pista de Pádel 1",
             "type": "Pádel",
-            "availability": true
+            "availability": true,
+            "description": "Pista de pádel cubierta"
         }
     },
     {
@@ -23,7 +25,8 @@
         "fields": {
             "name": "Campo de Fútbol",
             "type": "Fútbol",
-            "availability": true
+            "availability": true,
+            "description": "Campo de fútbol de césped natural"
         }
     },
     {
@@ -32,7 +35,8 @@
         "fields": {
             "name": "Pista de Baloncesto",
             "type": "Baloncesto",
-            "availability": false
+            "availability": false,
+            "description": "Pista de baloncesto al aire libre"
         }
     }
 ]
