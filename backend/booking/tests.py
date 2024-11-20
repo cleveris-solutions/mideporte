@@ -3,6 +3,7 @@ from django.urls import reverse
 from user.models import User
 from installation.models import Installation
 from booking.models import Booking, BookingStatus
+from booking.serializers import BookingSerializer
 from rest_framework.test import APIClient
 from rest_framework import status
 import json
@@ -17,6 +18,7 @@ ERROR_MISSING_FIELD = "Missing field: {field}"
 ERROR_INVALID_DATA = "Invalid data. Please check the request payload."
 SUCCESS_BOOKING_CREATED = "Booking created successfully."
 SUCCESS_BOOKING_CANCELLED = "Booking cancelled successfully."
+SUCCESS_BOOKING_DELETED = "Booking deleted successfully."
 
 
 
@@ -31,8 +33,42 @@ class BookingTests(TestCase):
         self.client.force_login(user=self.user)  # Authenticate the user for the tests
 
         # URLs for the endpoints
-        self.create_booking_url = reverse('create_booking')  # Adjust to the view name in urls.py
-        self.cancel_booking_url = lambda booking_id: reverse('cancel_booking', args=[booking_id])  # Function to generate dynamic URLs
+        self.create_booking_url = reverse('create_booking') 
+        self.cancel_booking_url = lambda booking_id: reverse('cancel_booking', args=[booking_id])  
+        self.delete_booking = lambda booking_id: reverse('delete_booking', args=[booking_id])
+        
+    def test_get_scheduled_bookings(self):
+        """Test getting all scheduled bookings."""
+        response = self.client.get(reverse('get_scheduled_bookings'))
+        bookings = Booking.objects.filter(status=BookingStatus.Scheduled)
+        serializer = BookingSerializer(bookings, many=True)
+
+        # Check the response
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json(), {
+            "bookings": serializer.data
+        })
+        
+    def test_get_booking(self):
+        """Test getting a single booking."""
+        booking = Booking.objects.create(
+            user=self.user,
+            installation=Installation.objects.first(),
+            start="2024-11-19 10:00:00",
+            status=BookingStatus.Scheduled
+        )
+        response = self.client.get(reverse('get_booking', args=[booking.id]))
+
+        # Check the response
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json(), {
+            "id": booking.id,
+            "user": self.user.DNI,
+            "installation": booking.installation.id,
+            "start": "2024-11-19T10:00:00Z",
+            "cancelled": False,
+            "status": "Programada"
+        })
 
     def test_create_booking_success(self):
         """Test successful booking creation."""
@@ -112,3 +148,20 @@ class BookingTests(TestCase):
         # Check the response
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.json(), {ERROR: ERROR_MISSING_FIELD.format(field='installation_id')})
+        
+    def test_delete_booking_success(self):
+        """Test successful booking deletion."""
+        booking = Booking.objects.create(
+            user=self.user,
+            installation=Installation.objects.first(),
+            start="2024-11-19T10:00:00Z",
+            status=BookingStatus.Scheduled
+        )
+        response = self.client.delete(self.delete_booking(booking.id))
+        
+        # Check the response
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json(), {MESSAGE: SUCCESS_BOOKING_DELETED})
+
+        # Verify that the booking was deleted
+        self.assertFalse(Booking.objects.filter(id=booking.id).exists())

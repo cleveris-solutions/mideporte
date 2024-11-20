@@ -4,13 +4,14 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 from .models import Booking, BookingStatus
 from user.models import User
+from .serializers import BookingSerializer
 from installation.models import Installation
 from rest_framework.decorators import api_view
 from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 
-
+BOOKINGS = "bookings"
 BOOKING_ID = 'booking_id'
 MESSAGE = 'message'         
 ERROR = 'error'
@@ -21,6 +22,31 @@ ERROR_MISSING_FIELD = "Missing field: {field}"
 ERROR_INVALID_DATA = "Invalid data. Please check the request payload."
 SUCCESS_BOOKING_CREATED = "Booking created successfully."
 SUCCESS_BOOKING_CANCELLED = "Booking cancelled successfully."
+SUCCESS_BOOKING_DELETED = "Booking deleted successfully."
+SUCCESS_BOOKING_UPDATED = "Booking updated successfully."
+
+@extend_schema()
+@require_http_methods(["GET"])
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_scheduled_bookings(request):
+    bookings = Booking.objects.filter(status=BookingStatus.Scheduled)
+    serializer = BookingSerializer(bookings, many=True)
+    return JsonResponse({BOOKINGS: serializer.data}, status=200)
+
+@extend_schema()
+@require_http_methods(["GET"])
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_booking(request, booking_id):
+    try:
+        booking = Booking.objects.get(id=booking_id)
+        serializer = BookingSerializer(booking)
+    except Booking.DoesNotExist:
+        return JsonResponse({ERROR: ERROR_BOOKING_NOT_FOUND}, status=404)
+
+    return JsonResponse(serializer.data, status=200, safe=False)
+    
 
 @extend_schema()
 @require_http_methods(["POST"])
@@ -65,3 +91,17 @@ def cancel_booking(request, booking_id):
         return JsonResponse({ERROR: ERROR_BOOKING_NOT_FOUND}, status=404)
 
     return JsonResponse({MESSAGE: SUCCESS_BOOKING_CANCELLED}, status=200)
+
+
+@extend_schema()
+@require_http_methods(["DELETE"])
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def delete_booking(request, booking_id):
+    try:
+        booking = Booking.objects.get(id=booking_id)
+        booking.delete()
+    except Booking.DoesNotExist:
+        return JsonResponse({ERROR: ERROR_BOOKING_NOT_FOUND}, status=404)
+
+    return JsonResponse({MESSAGE: SUCCESS_BOOKING_DELETED}, status=200)
