@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from installation.models import Installation
+from installation.models import Installation, InstallationType
 from unittest.mock import patch
 from datetime import date
 from user.models import User 
@@ -23,16 +23,19 @@ class SportListTests(TestCase):
 
         # Verify that the returned sports are unique
         sports = response.json()
-        self.assertCountEqual(sports, [
-            "Piscina",
-            "Pádel",
-            "Fútbol",
-            "Baloncesto"
-        ])
+        expected_sports = [
+            {"id": 1, "name": "Piscina", "description": "Piscina municipal de verano", "image": "/media/installation_types/swim.png"},
+            {"id": 2, "name": "Pádel", "description": "Pista de pádel cubierta", "image": "/media/installation_types/padel.png"},
+            {"id": 3, "name": "Fútbol", "description": "Campo de fútbol de césped natural", "image": "/media/installation_types/football.png"},
+            {"id": 4, "name": "Baloncesto", "description": "Pista de baloncesto al aire libre", "image": "/media/installation_types/basketball.png"}
+        ]
+        
+        self.assertEqual(sports, expected_sports)
 
     def test_sport_list_no_installations(self):
-        # Delete all installations
+        # Delete all installations and installation types
         Installation.objects.all().delete()
+        InstallationType.objects.all().delete()
 
         # Make the request to the endpoint
         response = self.client.get(reverse('sport_list'))
