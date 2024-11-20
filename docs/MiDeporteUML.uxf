@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>10</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>260</y>
-      <w>240</w>
-      <h>130</h>
+      <x>105</x>
+      <y>315</y>
+      <w>168</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Booking
@@ -21,17 +21,16 @@ Booking
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>500</y>
-      <w>240</w>
-      <h>130</h>
+      <x>105</x>
+      <y>483</y>
+      <w>168</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Installation
 --
 + id: Integer {PK, unique}
 + name: String {NotBlank}
-+ type: enum {NotNull}
 + description: String {NotBlank}
 + availability: Boolean {NotNull}</panel_attributes>
     <additional_attributes/>
@@ -39,10 +38,10 @@ Installation
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>10</y>
-      <w>240</w>
-      <h>160</h>
+      <x>105</x>
+      <y>140</y>
+      <w>168</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 User
@@ -60,10 +59,10 @@ User
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>160</y>
-      <w>70</w>
-      <h>120</h>
+      <x>182</x>
+      <y>245</y>
+      <w>49</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=*
@@ -74,10 +73,10 @@ Crea v</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>380</y>
-      <w>90</w>
-      <h>140</h>
+      <x>182</x>
+      <y>399</y>
+      <w>63</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -88,10 +87,10 @@ Implica v</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>470</x>
-      <y>500</y>
-      <w>240</w>
-      <h>120</h>
+      <x>385</x>
+      <y>483</y>
+      <w>168</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 InstallationType
@@ -105,10 +104,10 @@ InstallationType
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>260</y>
-      <w>240</w>
-      <h>100</h>
+      <x>301</x>
+      <y>315</y>
+      <w>168</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Enumerate&gt;&gt;
 BookingStatus
@@ -121,10 +120,10 @@ Cancelada</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>620</y>
-      <w>120</w>
-      <h>140</h>
+      <x>175</x>
+      <y>567</y>
+      <w>84</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
@@ -135,10 +134,10 @@ Dispone de v</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>740</y>
-      <w>240</w>
-      <h>120</h>
+      <x>105</x>
+      <y>651</y>
+      <w>168</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 AvailableHour
@@ -152,10 +151,10 @@ AvailableHour
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>300</x>
-      <y>540</y>
-      <w>190</w>
-      <h>50</h>
+      <x>266</x>
+      <y>511</y>
+      <w>133</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
