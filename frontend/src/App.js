@@ -13,8 +13,6 @@ import Profile from './screens/Profile';
 function App() {
   const { user } = useContext(AuthContext);
 
-  console.log(user);
-  
   return (
     <Router>
       <Navbar />

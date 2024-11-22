@@ -3,7 +3,7 @@ import './../assets/styles/screens/Login.css';
 import { AuthContext } from './../auth/AuthContext';
 
 const Login = () => {
-    const [code, setCode] = useState('');
+    const [DNI, setDNI] = useState('');
     const [error, setError] = useState('');
 
     const { login } = useContext(AuthContext)
@@ -13,12 +13,12 @@ const Login = () => {
     
         try {
             // TODO: Add the URL of the backend
-            const response = await fetch(`/api/v1/user/validate-login`, {
+            const response = await fetch(`/api/v1/users/authenticate/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ code }),
+                body: JSON.stringify({ DNI: DNI }),
             });
 
             if (!response.ok) {
@@ -36,7 +36,7 @@ const Login = () => {
         e.preventDefault();
 
         setTimeout(() => {
-            const simulatedResponse = { user: { name: 'Javier Santos', dni: code } };
+            const simulatedResponse = { user: { name: 'Javier Santos', dni: DNI } };
             login(simulatedResponse); 
         }, 500); 
     };
@@ -56,12 +56,12 @@ const Login = () => {
             </div>
 
             <div className="login-form">
-                <form onSubmit={handleSubmitTemporary}>
+                <form onSubmit={handleSubmit}>
                     <h3>Introduzca su DNI:</h3>
                     <input
                         type="text"
-                        value={code}
-                        onChange={(e) => setCode(e.target.value)}
+                        value={DNI}
+                        onChange={(e) => setDNI(e.target.value)}
                         placeholder="DNI:"
                     />
                     <button type="submit">Confirmar</button>

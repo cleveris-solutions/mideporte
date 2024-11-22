@@ -9,13 +9,21 @@ const Home = () => {
     const [sports, setSports] = useState([]);
     
     useEffect(() => {
-		// TODO: Fetch data from API :D
-        const sport1 = { sportName: 'Pádel', description: 'Pista para 4 personas', message: null };
-        const sport2 = { sportName: 'Fútbol', description: 'Pista para 14 personas', message: 'Tienes una pista reservada.' };
-        const sport3 = { sportName: 'Baloncesto', description: 'Pista para 10 personas', message: null };
-        const sport4 = { sportName: 'Piscina', description: '2 calles individuales', message: null };
         
-        setSports([sport1, sport2, sport3, sport4]);
+        const fetchSports = async () => {
+            fetch('/api/v1/installations/sports')
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    setSports(data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching data: ", error);
+                })
+        };
+
+        fetchSports();
     }, []);
     
 	return (
@@ -27,13 +35,11 @@ const Home = () => {
 
 			<div className='cards-container'>
 				{sports.map((sport, index) => (
-					<Link to={`/deportes/${sport.sportName}`} style={{textDecoration:'none'}}>
+					<Link to={`/deportes/${sport.name}`} style={{textDecoration:'none'}} key={index}>
 						<SportCard 
-							key={index} 
-							sport={sport.sportName} 
+							sport={sport.name} 
 							description={sport.description} 
-							message={sport.message} 
-							image={sportImages[sport.sportName]} 
+							image={sport.image} 
 							hoverEffect={true}
 						/>
 					</Link>
