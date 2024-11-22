@@ -24,6 +24,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     password = models.CharField(max_length=128, null=True)
     suspended = models.BooleanField(default=False, null=False)
     is_staff = models.BooleanField(default=False, null=False)
+    name = models.CharField(max_length=128,null=True)
+    surname = models.CharField(max_length=128,null=True)
 
     objects = UserManager()
 
