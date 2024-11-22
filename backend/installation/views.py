@@ -51,12 +51,8 @@ def available_schedule(request, installation_id, date):
         return JsonResponse({ERROR_KEY: INVALID_DATE_FORMAT_MSG}, status=400)
     
     available_hours = installation.get_available_hours(date)
-    
-    hourly_slots = []
-    for available_hour in available_hours:
-        hourly_slots.extend(available_hour.get_hourly_slots())
 
-    return JsonResponse(hourly_slots, safe=False)
+    return JsonResponse(available_hours, safe=False)
 
 
 
