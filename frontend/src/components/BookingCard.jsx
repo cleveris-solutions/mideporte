@@ -26,7 +26,7 @@ const BookingCard = ({bookingId, sport, details, date, image }) => {
         } catch (err) {
 			// Error handling might be improved
             setError(err.message);
-			console.log(error)
+			console.error(error)
         }
     };
 	

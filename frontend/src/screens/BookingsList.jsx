@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './../assets/styles/screens/BookingsList.css';
 import BookingCard from './../components/BookingCard';
 import { sportImages } from './../utils/imageMapping';
+import { AuthContext } from '../auth/AuthContext';
 
 const BookingsList = () => {
   const [bookings, setBookings] = useState([]);
+
+  const { user } = useContext(AuthContext);
     
     useEffect(() => {
 		// TODO: Fetch data from API
@@ -12,6 +15,22 @@ const BookingsList = () => {
         const booking2 = { id: 2, sportName: 'Pádel', details: 'Pista para 4 personas', date: 'Miércoles, 27 de agosto, 16:00-17:00' };
         const booking3 = { id: 3, sportName: 'Pádel', details: 'Pista para 4 personas', date: 'Miércoles, 27 de agosto, 17:00-18:00' };
         const booking4 = { id: 4, sportName: 'Baloncesto', details: 'Pista para 10 personas', date: 'Jueves, 28 de agosto, 20:00-21:00' };
+
+        const fetchBookings = async () => {
+            fetch(`api/v1/bookings/booking/${user.user.dni}`)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    setBookings(data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching data: ", error);
+                })
+        };
+
+        // fetchBookings();
+        
         
         setBookings([booking1, booking2, booking3, booking4]);
     }, []);
