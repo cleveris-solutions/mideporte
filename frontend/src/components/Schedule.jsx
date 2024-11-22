@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import './../assets/styles/components/Schedule.css';
 
-const Schedule = ({ value, onChange }) => {
+const Schedule = ({ value, onChange , date, installationId}) => {
     const [availableHours, setAvailableHours] = useState([]);
-    const everyHour = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+    
+    const everyHour = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"];
 
     useEffect(() => {
-        // Fetch the data from the API. :D
-        // At the moment, it's hardcoded
-        setAvailableHours([9, 10, 11, 12, 15, 16, 19, 20]);
-    }, []);
+
+        const fetchAvailableHours = async () => {
+            try {
+                const response = await fetch(`/api/v1/installations/availableSchedule/${installationId}/${date}`);
+                const data = await response.json();
+                setAvailableHours(data);
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
+        };
+    
+        fetchAvailableHours();
+        
+    }, [date, installationId]);
 
     const handleHourClick = (hour) => {
         if (hour !== value) {
@@ -18,8 +29,6 @@ const Schedule = ({ value, onChange }) => {
             onChange(null); 
         }
     };
-
-    const formatHourRange = (hour) => `${hour}:00 - ${hour + 1}:00`;
 
     return (
         <div className="schedule-container">
@@ -31,7 +40,7 @@ const Schedule = ({ value, onChange }) => {
                     className={`hour-button 
                         ${availableHours.includes(hour) ? 'available' : 'unavailable'} 
                         ${value === hour ? 'selected' : ''}`}>
-                    {formatHourRange(hour)}
+                    {hour}
                 </button>
             ))}
         </div>
