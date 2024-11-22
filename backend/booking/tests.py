@@ -154,14 +154,27 @@ class BookingTests(TestCase):
         booking = Booking.objects.create(
             user=self.user,
             installation=Installation.objects.first(),
-            start="2024-11-19T10:00:00Z",
+            start="2024-11-19 10:00:00",
             status=BookingStatus.Scheduled
         )
         response = self.client.delete(self.delete_booking(booking.id))
-        
+
         # Check the response
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(), {MESSAGE: SUCCESS_BOOKING_DELETED})
 
         # Verify that the booking was deleted
         self.assertFalse(Booking.objects.filter(id=booking.id).exists())
+        
+    def test_bookings_by_user_success(self):
+        """Test getting all bookings of a user."""
+        response = self.client.get(reverse('get_bookings_by_user', args=[self.user.DNI]))
+        bookings = Booking.objects.filter(user=self.user)
+        serializer = BookingSerializer(bookings, many=True)
+
+        # Check the response
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json(), {
+            "bookings": serializer.data
+        })
+        

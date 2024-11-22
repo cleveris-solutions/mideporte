@@ -56,21 +56,25 @@ class AvailableScheduleTests(TestCase):
         self.user = User.objects.get(DNI='12345678B')
         self.client.force_login(self.user)  
 
-    def test_available_schedule_success(self):
-        installation = Installation.objects.first()
-        installation_id = installation.pk
-        target_date = date.today().strftime('%Y-%m-%d')
+    @patch('installation.models.Installation.get_available_hours')
+    def test_available_schedule_success(self, mock_get_available_hours):
+        mock_get_available_hours.return_value = [
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00"
+        ]
+        url = reverse('available_schedule', args=[1, '2024-11-19'])
+        response = self.client.get(url)
 
-        with patch.object(Installation, 'get_available_hours', return_value=[
-            MockAvailableHour(["09:00", "10:00"]),
-            MockAvailableHour(["15:00", "16:00"]),
-        ]):
-            url = reverse('available_schedule', args=[installation_id, target_date])
-            response = self.client.get(url)
-
+        # Check the response
         self.assertEqual(response.status_code, 200)
-        expected_slots = ["09:00", "10:00", "15:00", "16:00"]
-        self.assertEqual(response.json(), expected_slots)
+        self.assertEqual(response.json(), [
+            "08:00",
+            "09:00",
+            "10:00",
+            "11:00"
+        ])
 
     def test_available_schedule_installation_not_found(self):
         invalid_installation_id = 9999

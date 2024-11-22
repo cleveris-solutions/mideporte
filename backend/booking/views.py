@@ -46,6 +46,20 @@ def get_booking(request, booking_id):
         return JsonResponse({ERROR: ERROR_BOOKING_NOT_FOUND}, status=404)
 
     return JsonResponse(serializer.data, status=200, safe=False)
+
+@extend_schema()
+@require_http_methods(["GET"])
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_bookings_by_user(request, dni):
+    try:
+        user = User.objects.get(DNI=dni)
+        bookings = Booking.objects.filter(user=user)
+        serializer = BookingSerializer(bookings, many=True)
+    except User.DoesNotExist:
+        return JsonResponse({ERROR: ERROR_USER_NOT_FOUND}, status=404)
+
+    return JsonResponse({BOOKINGS: serializer.data}, status=200)
     
 
 @extend_schema()
