@@ -18,7 +18,7 @@ class Installation(models.Model):
     availability = models.BooleanField(null=False)
     
     # Returns a list of hourly slots available for a specific date
-    def get_available_hours(self, date):
+    def get_open_hours(self, date):
         day_of_week = date.strftime('%A')
         available_hours = self.available_hours.filter(day_of_week=day_of_week)
         

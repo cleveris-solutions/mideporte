@@ -12,7 +12,6 @@ class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, db_column='DNI')
     installation = models.ForeignKey(Installation, on_delete=models.PROTECT)
     start = models.DateTimeField(null=False)
-    cancelled = models.BooleanField(default=False, null=False)
     status = models.CharField(max_length=20, choices=BookingStatus.choices, default=BookingStatus.Scheduled)
 
     def __str__(self):
