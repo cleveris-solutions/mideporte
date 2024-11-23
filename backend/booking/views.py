@@ -68,7 +68,7 @@ def check_installation_disponibility(installation, date):
     availibility = True
     hour = date.strftime('%H:%M')
     # Check if the date is among the installation open hours
-    available_hours = installation.get_available_hours(date.date()) 
+    available_hours = installation.get_open_hours(date.date()) 
     if hour not in available_hours:
         availibility = False
             
@@ -102,7 +102,7 @@ def create_booking(request):
         instalation_available = check_installation_disponibility(installation, date)
         booking = Booking.objects.create(user=user,
                                          installation=installation, 
-                                         start=start_time,
+                                         start=date,
                                          status=BookingStatus.Scheduled)
     except Installation.DoesNotExist:
         return JsonResponse({ERROR: ERROR_INSTALLATION_NOT_FOUND}, status=404)
