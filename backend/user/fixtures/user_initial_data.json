@@ -6,7 +6,11 @@
             "DNI": "12345678B",
             "password": "pbkdf2_sha256$260000$examplehashedpassword1",
             "suspended": false,
-            "is_staff": false
+            "is_staff": false,
+            "name": "Antonio",
+            "surname":"Jiménez Ortega",
+            "email":"antjimort@us.es",
+            "telephone_number":"666666666"
         }
     },
     {
@@ -16,7 +20,11 @@
             "DNI": "98765432A",
             "password": "pbkdf2_sha256$260000$examplehashedpassword2",
             "suspended": false,
-            "is_staff": true
+            "is_staff": true,
+            "name":"Maria José",
+            "surname": "Escalona Cuaresma",
+            "email":"mjescalona@us.es",
+            "telephone_number":"681234023"
         }
     }
 ]
