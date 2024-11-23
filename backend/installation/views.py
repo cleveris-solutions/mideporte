@@ -3,7 +3,7 @@ from django.views.decorators.http import require_http_methods
 from .models import Installation, InstallationType
 from datetime import datetime
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import permission_classes
+from rest_framework.decorators import permission_classes, api_view
 from .serializers import InstallationTypeSerializer, InstallationSerializer
 from django.shortcuts import get_object_or_404
 
@@ -15,6 +15,7 @@ INVALID_DATE_FORMAT_MSG = 'Invalid date format'
 
 @require_http_methods(["GET"])
 @permission_classes([IsAuthenticated])
+@api_view(["GET"])
 def get_all_installations(request):
     installations = Installation.objects.all()
     serializer = InstallationSerializer(installations, many=True)
@@ -23,6 +24,7 @@ def get_all_installations(request):
 
 @require_http_methods(["GET"])
 @permission_classes([IsAuthenticated])
+@api_view(["GET"])
 def get_installations_by_type(request, type):
     installation_type = get_object_or_404(InstallationType, name=type)
     installations = Installation.objects.filter(type=installation_type)
@@ -32,6 +34,7 @@ def get_installations_by_type(request, type):
 
 @require_http_methods(["GET"])
 @permission_classes([IsAuthenticated])
+@api_view(["GET"])
 def sport_list(request):
     sports = InstallationType.objects.all()
     serializer = InstallationTypeSerializer(sports, many=True)
@@ -39,6 +42,7 @@ def sport_list(request):
 
 
 @require_http_methods(["GET"])
+@api_view(["GET"])
 def available_schedule(request, installation_id, date):
     try:
         installation = Installation.objects.get(pk=installation_id)

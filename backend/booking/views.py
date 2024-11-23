@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view
 from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
+from datetime import datetime
 
 BOOKINGS = "bookings"
 BOOKING_ID = 'booking_id'
@@ -24,6 +25,7 @@ SUCCESS_BOOKING_CREATED = "Booking created successfully."
 SUCCESS_BOOKING_CANCELLED = "Booking cancelled successfully."
 SUCCESS_BOOKING_DELETED = "Booking deleted successfully."
 SUCCESS_BOOKING_UPDATED = "Booking updated successfully."
+INVALID_DATE_FORMAT_MSG = "Invalid date format."
 
 @extend_schema()
 @require_http_methods(["GET"])
@@ -62,31 +64,52 @@ def get_bookings_by_user(request, dni):
     return JsonResponse({BOOKINGS: serializer.data}, status=200)
     
 
+def check_installation_disponibility(installation, date):
+    availibility = True
+    hour = date.strftime('%H:%M')
+    # Check if the date is among the installation open hours
+    available_hours = installation.get_available_hours(date.date()) 
+    if hour not in available_hours:
+        availibility = False
+            
+    # Check if there is already a booking for that date and hour
+    bookings = Booking.objects.filter(installation=installation, start=date)
+    if bookings:
+        availibility = False
+        
+    if not availibility:
+        raise Exception("The installation is not available at the selected date and time")
+    
+
+
 @extend_schema()
 @require_http_methods(["POST"])
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def create_booking(request):
     data = json.loads(request.body)
-    required_fields = ['user_id', 'installation_id', 'start_time']
+    required_fields = ['installation_id', 'start_time']
     for field in required_fields:
         if field not in data:
             return JsonResponse({ERROR: ERROR_MISSING_FIELD.format(field=field)}, status=400)
 
-    user_dni = data['user_id']
-    installation = data['installation_id']
+    user = request.user
+    installation_id = data['installation_id']
     start_time = data['start_time']
     try:
-        user = User.objects.get(DNI=user_dni)
-        installation = Installation.objects.get(id=installation)
+        installation = Installation.objects.get(id=installation_id)
+        date = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%SZ').replace(minute=0, second=0, microsecond=0)
+        instalation_available = check_installation_disponibility(installation, date)
         booking = Booking.objects.create(user=user,
                                          installation=installation, 
                                          start=start_time,
                                          status=BookingStatus.Scheduled)
-    except User.DoesNotExist:
-        return JsonResponse({ERROR: ERROR_USER_NOT_FOUND}, status=404)
     except Installation.DoesNotExist:
         return JsonResponse({ERROR: ERROR_INSTALLATION_NOT_FOUND}, status=404)
+    except ValueError:
+        return JsonResponse({ERROR: INVALID_DATE_FORMAT_MSG}, status=400)
+    except Exception as e:
+        return JsonResponse({ERROR: str(e)}, status=400)
 
     return JsonResponse({MESSAGE: SUCCESS_BOOKING_CREATED, BOOKING_ID:booking.id}, status=201)
 
