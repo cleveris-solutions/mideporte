@@ -45,6 +45,8 @@ class AuthenticateDNI(APIView):
                 'suspended': user.suspended,
                 'is_staff': user.is_staff,
                 'name': user.name,
-                'surname': user.surname
+                'surname': user.surname,
+                'email': user.email,
+                'telephone_number': user.telephone_number
             }
         })
