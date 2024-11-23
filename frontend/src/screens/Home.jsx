@@ -24,7 +24,7 @@ const Home = () => {
         };
 
         fetchSports();
-    }, []);
+    }, [sports]);
     
 	return (
 		<div className='home-container'>
