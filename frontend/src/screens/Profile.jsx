@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import './../assets/styles/screens/Profile.css';
 import './../assets/styles/modal.css';
@@ -14,7 +14,7 @@ const Profile = () => {
     const handleLogOut = () => {
         logout();   
     }
-
+    
     return(
         <div className="profile">
             <header className="profile-header">
@@ -28,8 +28,20 @@ const Profile = () => {
                     <span>{user.user.name}</span>
                 </li>
                 <li>
+                    Apellidos:
+                    <span>{user.user.surname}</span>
+                </li>
+                <li>
                     DNI:
-                    <span>{user.user.dni}</span>
+                    <span>{user.user.DNI}</span>
+                </li>
+                <li>
+                    Correo electrónico:
+                    <span>{user.user.email}</span>
+                </li>
+                <li>
+                    Número de teléfono:
+                    <span>{user.user.telephone_number}</span>
                 </li>
             </ul>
 
