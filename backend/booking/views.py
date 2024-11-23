@@ -122,23 +122,13 @@ def create_booking(request):
 def cancel_booking(request, booking_id):
     try:
         booking = Booking.objects.get(id=booking_id)
+        if booking.user != request.user:
+            raise Exception("You are not allowed to cancel this booking")
         booking.status = BookingStatus.Cancelled
         booking.save()
     except Booking.DoesNotExist:
         return JsonResponse({ERROR: ERROR_BOOKING_NOT_FOUND}, status=404)
+    except Exception as e:
+        return JsonResponse({ERROR: str(e)}, status=400)
 
     return JsonResponse({MESSAGE: SUCCESS_BOOKING_CANCELLED}, status=200)
-
-
-@extend_schema()
-@require_http_methods(["DELETE"])
-@api_view(["DELETE"])
-@permission_classes([IsAuthenticated])
-def delete_booking(request, booking_id):
-    try:
-        booking = Booking.objects.get(id=booking_id)
-        booking.delete()
-    except Booking.DoesNotExist:
-        return JsonResponse({ERROR: ERROR_BOOKING_NOT_FOUND}, status=404)
-
-    return JsonResponse({MESSAGE: SUCCESS_BOOKING_DELETED}, status=200)
