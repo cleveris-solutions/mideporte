@@ -13,7 +13,7 @@ const Navbar = () => {
         <div className="logo-image">
           <img src={escudo} alt="Escudo Villanueva de las Cruces" />
         </div>
-        <Link to="/">Villanueva de las Cruces</Link>
+        <Link className="logo-text" to="/">Villanueva de las Cruces</Link>
       </div>
       
       <ul className="navbar-links">
@@ -24,7 +24,7 @@ const Navbar = () => {
           <Link to="/deportes">Deportes</Link>
         </li>
         <li className="navbar-main-container">
-          <Link to="/perfil">
+          <Link className='navbar-main-link' to="/perfil">
             <span className="navbar-main-highlight">Perfil</span>
           </Link>
         </li>
