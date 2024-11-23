@@ -79,7 +79,7 @@ footer {
   color: var(--main-blue);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 300px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
@@ -92,14 +92,27 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  .logo-text {
+    display: none;
+  }
+}
+
 .navbar-main-container {
+  list-style: none;
+}
+
+.navbar-main-link {
+  display: inline-block; 
   background-color: var(--main-blue);
   color: white;
   padding: 0.5rem 1.4rem;
   border-radius: 10px;
+  text-decoration: none; 
+  text-align: center; 
 }
 
-.navbar-main-container:hover {
+.navbar-main-link:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease;
 }

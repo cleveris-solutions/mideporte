@@ -10,34 +10,30 @@ const BookingsList = () => {
   const { user } = useContext(AuthContext);
     
     useEffect(() => {
-		// TODO: Fetch data from API
-        const booking1 = { id: 1, sportName: 'Fútbol', details: 'Pista para 14 personas', date: 'Lunes, 25 de agosto, 11:00-12:00' };
-        const booking2 = { id: 2, sportName: 'Pádel', details: 'Pista para 4 personas', date: 'Miércoles, 27 de agosto, 16:00-17:00' };
-        const booking3 = { id: 3, sportName: 'Pádel', details: 'Pista para 4 personas', date: 'Miércoles, 27 de agosto, 17:00-18:00' };
-        const booking4 = { id: 4, sportName: 'Baloncesto', details: 'Pista para 10 personas', date: 'Jueves, 28 de agosto, 20:00-21:00' };
-
         const fetchBookings = async () => {
-            fetch(`api/v1/bookings/booking/${user.user.dni}`)
-                .then((response) => {
-                    return response.json();
+            try {
+                const response = await fetch(`/api/v1/bookings/${user.user.DNI}`, {
+                    headers: {
+                        'Authorization': `Token ${user.token}`
+                    }
                 })
-                .then((data) => {
-                    setBookings(data);
-                })
-                .catch((error) => {
-                    console.error("Error fetching data: ", error);
-                })
+                const data = await response.json();
+                setBookings(data.bookings);
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
         };
-
-        // fetchBookings();
         
+        fetchBookings();
         
-        setBookings([booking1, booking2, booking3, booking4]);
-    }, []);
+    }, [user]);
 
+    console.log(bookings)
+    
     return (
         <div className="bookings-list">
             <header className="bookings-header">
+                <h1>No se asusten, funciona todo ok, estamos esperando a un cambio en los serializers para que lo vean lindo :D</h1>
                 <h1>Lista de reservas</h1>
                 <h2>Estas son tus reservas confirmadas.</h2>
             </header>
@@ -49,7 +45,7 @@ const BookingsList = () => {
                         bookingId={booking.id}
                         sport={booking.sportName} 
                         details={booking.details} 
-                        date={booking.date} 
+                        date={booking.start} 
                         image={sportImages[booking.sportName]} 
                     />
 				))}
