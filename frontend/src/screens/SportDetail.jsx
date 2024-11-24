@@ -26,7 +26,11 @@ const SportDetail = () => {
     useEffect(() => {
         const fetchSport = async () => {
             try {
-                const response = await fetch(`/api/v1/installations/type/${sportName}`);
+                const response = await fetch(`/api/v1/installations/type/${sportName}`, {
+                    headers: {
+                        'Authorization': `Token ${user.token}`
+                    }
+                });
                 const data = await response.json();
                 setInstallations(data);
     
@@ -54,12 +58,12 @@ const SportDetail = () => {
                 body: JSON.stringify({
                     user_id: user.user.DNI,
                     installation_id: installations[installation].id,
-                    start_time: selectedDate.toISOString().split("T")[0] + " " + selectedSchedule
+                    start_time: buildStartDate(selectedDate, selectedSchedule)
                 })
             });
 
             if (!response.ok) {
-                throw new Error('Something went wrong');
+                throw new Error('Algo salió mal');
             } else {
                 setError("")
                 setIsModalOpen(false)
@@ -80,6 +84,10 @@ const SportDetail = () => {
         } else {
             return "Instalación";
         }
+    }
+
+    const buildStartDate = (date, schedule) => {
+        return date.toLocaleDateString("en-CA") + "T" + schedule + ":00Z";
     }
     
     return (
@@ -107,7 +115,7 @@ const SportDetail = () => {
                         <Schedule 
                             value={selectedSchedule} 
                             onChange={(hour) => setSelectedSchedule(hour)} 
-                            date={selectedDate.toISOString().split("T")[0]}
+                            date={selectedDate.toLocaleDateString("en-CA")}
                             installationId={installations.length > 0 ? installations[installation].id : 1}/>
                     </div>
                     {installations.length > 1 && (
