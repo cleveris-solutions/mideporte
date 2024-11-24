@@ -11,6 +11,31 @@
     gap: 20px;
 }
 
+@media (min-width: 970px) and (max-width: 1370px) {
+    .cards-container > * {
+        flex: 1 1 calc(33% - 20px);
+        max-width: calc(33% - 20px);
+    }
+}
+
+@media (min-width: 750px) and (max-width: 970px) {
+    .cards-container > * {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 750px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cards-container > * {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
 .home-header h1{
     font-size: 3.8rem;
     font-weight: 700;
