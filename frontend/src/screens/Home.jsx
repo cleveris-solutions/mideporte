@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './../auth/AuthContext';
 import { sportImages } from './../utils/imageMapping';
 import SportCard from './../components/SportCard';
 import './../assets/styles/screens/Home.css';
@@ -7,11 +8,17 @@ import './../assets/styles/screens/Home.css';
 const Home = () => {
 
     const [sports, setSports] = useState([]);
+
+	const { user } = useContext(AuthContext); 
     
     useEffect(() => {
         
         const fetchSports = async () => {
-            fetch('/api/v1/installations/sports')
+            fetch('/api/v1/installations/sports', {
+				headers: {
+					'Authorization': `Token ${user.token}`
+				}
+			})
                 .then((response) => {
                     return response.json();
                 })
@@ -24,7 +31,7 @@ const Home = () => {
         };
 
         fetchSports();
-    }, [sports]);
+    }, []);
     
 	return (
 		<div className='home-container'>

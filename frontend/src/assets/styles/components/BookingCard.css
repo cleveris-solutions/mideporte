@@ -12,11 +12,17 @@
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-color: var(--light-blue);
-    background: linear-gradient(to right, var(--light-gray), var(--light-blue));
     text-decoration: none;
     width: 100%;
     max-width: 100%;
+}
+
+.gradient-red {
+    background: linear-gradient(to bottom right, var(--light-gray), var(--main-red));
+}
+
+.gradient-blue {
+    background: linear-gradient(to bottom right, var(--light-blue), #8ab4f9);
 }
 
 
