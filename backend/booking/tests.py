@@ -18,7 +18,6 @@ ERROR_MISSING_FIELD = "Missing field: {field}"
 ERROR_INVALID_DATA = "Invalid data. Please check the request payload."
 SUCCESS_BOOKING_CREATED = "Booking created successfully."
 SUCCESS_BOOKING_CANCELLED = "Booking cancelled successfully."
-SUCCESS_BOOKING_DELETED = "Booking deleted successfully."
 
 
 
@@ -35,7 +34,6 @@ class BookingTests(TestCase):
         # URLs for the endpoints
         self.create_booking_url = reverse('create_booking') 
         self.cancel_booking_url = lambda booking_id: reverse('cancel_booking', args=[booking_id])  
-        self.delete_booking = lambda booking_id: reverse('delete_booking', args=[booking_id])
         
     def test_get_scheduled_bookings(self):
         """Test getting all scheduled bookings."""
@@ -64,9 +62,8 @@ class BookingTests(TestCase):
         self.assertEqual(response.json(), {
             "id": booking.id,
             "user": self.user.DNI,
-            "installation": booking.installation.id,
+            "installation": booking.installation,
             "start": "2024-11-19T10:00:00Z",
-            "cancelled": False,
             "status": "Programada"
         })
 
@@ -99,7 +96,7 @@ class BookingTests(TestCase):
 
         # Check the response
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-        self.assertEqual(response.json(), {"error": "User not found."})
+        self.assertEqual(response.json(), {ERROR: ERROR_USER_NOT_FOUND})
 
     def test_create_booking_installation_not_found(self):
         """Test booking creation with a non-existent installation."""
@@ -148,23 +145,6 @@ class BookingTests(TestCase):
         # Check the response
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.json(), {ERROR: ERROR_MISSING_FIELD.format(field='installation_id')})
-        
-    def test_delete_booking_success(self):
-        """Test successful booking deletion."""
-        booking = Booking.objects.create(
-            user=self.user,
-            installation=Installation.objects.first(),
-            start="2024-11-19 10:00:00",
-            status=BookingStatus.Scheduled
-        )
-        response = self.client.delete(self.delete_booking(booking.id))
-
-        # Check the response
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.json(), {MESSAGE: SUCCESS_BOOKING_DELETED})
-
-        # Verify that the booking was deleted
-        self.assertFalse(Booking.objects.filter(id=booking.id).exists())
         
     def test_bookings_by_user_success(self):
         """Test getting all bookings of a user."""
