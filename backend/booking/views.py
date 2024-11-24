@@ -23,7 +23,6 @@ ERROR_MISSING_FIELD = "Missing field: {field}"
 ERROR_INVALID_DATA = "Invalid data. Please check the request payload."
 SUCCESS_BOOKING_CREATED = "Booking created successfully."
 SUCCESS_BOOKING_CANCELLED = "Booking cancelled successfully."
-SUCCESS_BOOKING_DELETED = "Booking deleted successfully."
 SUCCESS_BOOKING_UPDATED = "Booking updated successfully."
 INVALID_DATE_FORMAT_MSG = "Invalid date format."
 

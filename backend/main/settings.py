@@ -93,6 +93,9 @@ DATABASES = {
         'PASSWORD': 'mideporte_password',       # Contraseña del usuario
         'HOST': 'localhost',                   # Dirección del servidor de la base de datos
         'PORT': '3306',
+        'TEST': {
+            'NAME': 'mideportedb_test',
+        }
     }
 }
 
