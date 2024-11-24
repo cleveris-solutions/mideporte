@@ -1,20 +1,24 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './../assets/styles/components/BookingCard.css';
 import './../assets/styles/modal.css';
+import { AuthContext } from '../auth/AuthContext';
 
-const BookingCard = ({bookingId, sport, details, date, image }) => {
+const BookingCard = ({bookingId, installation, details, date, image, status }) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 	const [error, setError] = useState('');
+
+    const { user } = useContext(AuthContext);
 	
 	const handleCancel = async (e) => {
         e.preventDefault();
     
         try {
-            const response = await fetch(`/api/v1/booking/cancel/${bookingId}`, {
+            const response = await fetch(`/api/v1/bookings/cancel/${bookingId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Token ${user.token}`,
                 },
             });
 
@@ -23,6 +27,7 @@ const BookingCard = ({bookingId, sport, details, date, image }) => {
             }
 
             const data = await response.json();
+            window.location.reload();
         } catch (err) {
 			// Error handling might be improved
             setError(err.message);
@@ -30,21 +35,27 @@ const BookingCard = ({bookingId, sport, details, date, image }) => {
         }
     };
 	
+    const buildDate = (date) => {
+        const dateObj = new Date(date);
+        return `${dateObj.getDate()}/${dateObj.getMonth() + 1}/${dateObj.getFullYear()} ${dateObj.getHours()}:${dateObj.getMinutes() < 10 ? '0' + dateObj.getMinutes() : dateObj.getMinutes()}`;
+    }
+
     return (
 		<div className='booking-card-container'> 
-			<div className={'booking-card'}> 
+			<div className={`booking-card ${status === 'Cancelada' ? 'gradient-red' : 'gradient-blue'}`}>
 
-				<img className="booking-image" src={image} alt={sport} />
+				<img className="booking-image" src={image} alt={installation} />
 				
 				<div className="booking-details">
-					<h3 className="booking-title">{sport}</h3>
+					<h3 className="booking-title">{installation}</h3>
 					<p className="booking-description">{details}</p>
-					<span className="booking-date">{date}</span>
+					<span className="booking-date">{buildDate(date)}</span>
+                    <span>{status}</span>
 				</div>
 				
-				<div className='booking-cancel' onClick={() => {setIsModalOpen(true)}}>
+				{status !== 'Cancelada' && <div className='booking-cancel' onClick={() => {setIsModalOpen(true)}}>
 					&#10005;
-				</div>
+				</div>}
 
                 
 

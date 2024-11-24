@@ -28,25 +28,25 @@ const BookingsList = () => {
         
     }, [user]);
 
-    console.log(bookings)
-    
+    const sortedBookings = bookings.sort((a, b) => new Date(b.start) - new Date(a.start));
+
     return (
         <div className="bookings-list">
             <header className="bookings-header">
-                <h1>No se asusten, funciona todo ok, estamos esperando a un cambio en los serializers para que lo vean lindo :D</h1>
                 <h1>Lista de reservas</h1>
                 <h2>Estas son tus reservas confirmadas.</h2>
             </header>
 
             <div className="bookings-container">
-                {bookings.map((booking) => (
+                {sortedBookings.map((booking) => (
                     <BookingCard 
                         key={booking.id} 
                         bookingId={booking.id}
-                        sport={booking.sportName} 
+                        installation={booking.installation.name} 
                         details={booking.details} 
                         date={booking.start} 
-                        image={sportImages[booking.sportName]} 
+                        image={booking.installation.type.image} 
+                        status={booking.status}
                     />
 				))}
             </div>
