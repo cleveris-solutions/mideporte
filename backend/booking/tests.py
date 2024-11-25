@@ -7,6 +7,7 @@ from booking.serializers import BookingSerializer
 from rest_framework.test import APIClient
 from rest_framework import status
 import json
+from unittest.mock import patch
 
 BOOKING_ID = 'booking_id'
 MESSAGE = 'message'         
@@ -62,15 +63,26 @@ class BookingTests(TestCase):
         self.assertEqual(response.json(), {
             "id": booking.id,
             "user": self.user.DNI,
-            "installation": booking.installation,
+            "installation": {
+                "id": booking.installation.id,
+                "name": booking.installation.name,
+                "type": {
+                    "id": booking.installation.type.id,
+                    "name": booking.installation.type.name,
+                    "description": booking.installation.type.description,
+                    "image": booking.installation.type.image.url
+                },
+                "description": booking.installation.description,
+                "availability": booking.installation.availability
+            },
             "start": "2024-11-19T10:00:00Z",
             "status": "Programada"
         })
 
-    def test_create_booking_success(self):
+    @patch('booking.views.check_installation_disponibility', return_value=True)
+    def test_create_booking_success(self, mock_check_installation_disponibility):
         """Test successful booking creation."""
         payload = {
-            "user_id": self.user.DNI,
             "installation_id": Installation.objects.first().id,
             "start_time": "2024-11-19T10:00:00Z"
         }
@@ -78,25 +90,12 @@ class BookingTests(TestCase):
 
         # Check the response
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertIn(MESSAGE, response.json())
-        self.assertIn(BOOKING_ID, response.json())
+        self.assertIn('message', response.json())
+        self.assertIn('booking_id', response.json())
 
         # Verify that the booking was created
-        booking = Booking.objects.filter(user=self.user, installation_id=payload['installation_id'], start=payload['start_time'])
+        booking = Booking.objects.filter(user=self.user, installation_id=payload['installation_id'], start="2024-11-19 10:00:00")
         self.assertTrue(booking.exists())
-
-    def test_create_booking_user_not_found(self):
-        """Test booking creation with a non-existent user."""
-        payload = {
-            "user_id": "77858824W",
-            "installation_id": Installation.objects.first().id,
-            "start_time": "2024-11-19T10:00:00Z",
-        }
-        response = self.client.post(self.create_booking_url, json.dumps(payload), content_type="application/json")
-
-        # Check the response
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-        self.assertEqual(response.json(), {ERROR: ERROR_USER_NOT_FOUND})
 
     def test_create_booking_installation_not_found(self):
         """Test booking creation with a non-existent installation."""

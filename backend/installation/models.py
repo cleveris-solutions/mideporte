@@ -29,7 +29,7 @@ class Installation(models.Model):
         return hourly_slots
 
     def __str__(self):
-        return f"{self.name} ({self.get_type_display()})"
+        return f"{self.name}"
     
 class AvailableHour(models.Model):
     installation = models.ForeignKey(Installation, on_delete=models.CASCADE, related_name='available_hours')
