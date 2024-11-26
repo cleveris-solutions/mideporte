@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
-from datetime import datetime
+from datetime import datetime, timedelta
 
 BOOKINGS = "bookings"
 BOOKING_ID = 'booking_id'
@@ -72,14 +72,29 @@ def check_installation_disponibility(installation, date):
         availibility = False
             
     # Check if there is already a booking for that date and hour
-    bookings = Booking.objects.filter(installation=installation, start=date)
+    bookings = Booking.objects.filter(installation=installation, start=date).exclude(status=BookingStatus.Cancelled)
     if bookings:
         availibility = False
         
     if not availibility:
         raise Exception("The installation is not available at the selected date and time")
     
+def user_booking_viability(user, installation, date):
+    # Check if the user has already a booking for other installation at the same date and time
+    bookings_same_time = Booking.objects.filter(user=user, start=date).exclude(status=BookingStatus.Cancelled)
+    if bookings_same_time:
+        raise Exception("You can't have more than two bookings at the same time")
+    
+    # Check if the user has already two consecutive bookings at the same installation
+    start_range = date - timedelta(hours=2)
+    end_range = date + timedelta(hours=2)
 
+    bookings_same_installation = Booking.objects.filter(user=user, 
+                                                        installation=installation,
+                                                        start__range=(start_range, end_range)
+                                                        ).exclude(status=BookingStatus.Cancelled)
+    if len(bookings_same_installation) >= 2:
+        raise Exception("You can't have more than two consecutive bookings at the same installation")
 
 @extend_schema()
 @require_http_methods(["POST"])
@@ -98,7 +113,9 @@ def create_booking(request):
     try:
         installation = Installation.objects.get(id=installation_id)
         date = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%SZ').replace(minute=0, second=0, microsecond=0)
-        instalation_available = check_installation_disponibility(installation, date)
+        # Check if the user can book the installation at the selected date and time
+        check_installation_disponibility(installation, date)
+        user_booking_viability(user, installation, date)
         booking = Booking.objects.create(user=user,
                                          installation=installation, 
                                          start=date,
