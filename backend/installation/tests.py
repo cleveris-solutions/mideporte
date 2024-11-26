@@ -6,13 +6,51 @@ from datetime import date
 from user.models import User 
 
 
+DETAIL_ERROR = 'detail'
+ERROR_INSTALLATION_TYPE_NOT_FOUND = 'No InstallationType matches the given query.'
+
 class SportListTests(TestCase):
     fixtures = ['installation_initial_data.json', 'user_initial_data.json']
     
     def setUp(self):
         # Log in using the user from the fixture
         self.user = User.objects.get(DNI='12345678B')
-        self.client.force_login(self.user)  
+        self.client.force_login(self.user)
+        
+    def test_get_all_installations_success(self):
+        # Make the request to the endpoint
+        response = self.client.get(reverse('get_all_installations'))
+        
+        # Verify the status code
+        self.assertEqual(response.status_code, 200)
+        
+        # Verify that the returned installations are unique
+        installations = response.json()
+        self.assertEqual(len(installations), 4)  
+        
+    def test_get_installations_by_type_success(self):
+        # Make the request to the endpoint
+        response = self.client.get(reverse('get_installations_by_type', args=['Piscina']))
+        
+        # Verify the status code
+        self.assertEqual(response.status_code, 200)
+        
+        # Verify that the returned installations are unique
+        installations = response.json()
+        self.assertEqual(len(installations), 1)
+        self.assertEqual(installations[0]['name'], 'Piscina Municipal')
+        self.assertEqual(installations[0]['type']['id'], 1)
+        self.assertEqual(installations[0]['description'], 'Piscina municipal de verano')
+        self.assertEqual(installations[0]['availability'], True)
+        
+    def test_get_installations_by_type_not_found(self):
+        # Make the request to the endpoint
+        response = self.client.get(reverse('get_installations_by_type', args=['Tenis']))
+        
+        # Verify the status code
+        self.assertEqual(response.status_code, 404)
+        
+        self.assertEqual(response.json(), {DETAIL_ERROR: ERROR_INSTALLATION_TYPE_NOT_FOUND})
 
     def test_sport_list_success(self):
         # Make the request to the endpoint
@@ -56,9 +94,9 @@ class AvailableScheduleTests(TestCase):
         self.user = User.objects.get(DNI='12345678B')
         self.client.force_login(self.user)  
 
-    @patch('installation.models.Installation.get_available_hours')
-    def test_available_schedule_success(self, mock_get_available_hours):
-        mock_get_available_hours.return_value = [
+    @patch('installation.models.Installation.get_open_hours')
+    def test_available_schedule_success(self, mock_get_open_hours):
+        mock_get_open_hours.return_value = [
             "08:00",
             "09:00",
             "10:00",
@@ -97,7 +135,7 @@ class AvailableScheduleTests(TestCase):
         installation_id = installation.pk
         target_date = date.today().strftime('%Y-%m-%d')
 
-        with patch.object(Installation, 'get_available_hours', return_value=[]):
+        with patch.object(Installation, 'get_open_hours', return_value=[]):
             url = reverse('available_schedule', args=[installation_id, target_date])
             response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

@@ -40,7 +40,7 @@
         "pk": 1,
         "fields": {
             "name": "Piscina Municipal",
-            "type": "1",
+            "type": 1,
             "availability": true,
             "description": "Piscina municipal de verano"
         }
