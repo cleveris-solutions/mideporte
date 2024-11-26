@@ -46,7 +46,6 @@ const Profile = () => {
             </ul>
 
             {isModalOpen && (
-                // TODO: Fix Footer background color
                 <div className="modal-overlay">
                     <div className="modal">
                         <h4>¿Quiere cerrar sesión?</h4>

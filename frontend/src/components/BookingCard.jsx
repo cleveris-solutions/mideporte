@@ -60,7 +60,6 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
                 
 
                 {isModalOpen && (
-                // TODO: Fix Footer background color
                 <div className="modal-overlay">
                     <div className="modal">
                         <h4>¿Seguro que deseas cancelar esta reserva?</h4>

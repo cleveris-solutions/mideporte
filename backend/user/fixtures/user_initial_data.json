@@ -7,10 +7,10 @@
             "password": "pbkdf2_sha256$260000$examplehashedpassword1",
             "suspended": false,
             "is_staff": false,
-            "name": "Antonio",
-            "surname":"Jiménez Ortega",
-            "email":"antjimort@us.es",
-            "telephone_number":"666666666"
+            "name": "María",
+            "surname":"De La Cruz",
+            "email":"mariadelacruz@villanuevadelascruces.es",
+            "telephone_number":"612345789"
         }
     },
     {
@@ -25,6 +25,34 @@
             "surname": "Escalona Cuaresma",
             "email":"mjescalona@us.es",
             "telephone_number":"681234023"
+        }
+    },
+    {
+        "model": "user.user",
+        "pk": 3,
+        "fields": {
+            "DNI": "12345678A",
+            "password": "pbkdf2_sha256$260000$examplehashedpassword3",
+            "suspended": false,
+            "is_staff": false,
+            "name": "Sebastián",
+            "surname":"Candelas",
+            "email":"sebastiancandelas@villanuevadelascruces.es",
+            "telephone_number":"698754321"
+        }
+    },
+    {
+        "model": "user.user",
+        "pk": 4,
+        "fields": {
+            "DNI": "12345678C",
+            "password": "pbkdf2_sha256$260000$examplehashedpassword4",
+            "suspended": false,
+            "is_staff": false,
+            "name": "Alonso",
+            "surname":"Limón Macias",
+            "email":"alonsolimonmacias@villanuevadelascruces.es",
+            "telephone_number":"602834917"
         }
     }
 ]

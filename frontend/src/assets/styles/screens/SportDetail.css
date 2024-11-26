@@ -2,7 +2,7 @@
     display: flex;
     gap: 50px;
     padding-top: 10vh;
-    padding: 5rem 5rem;
+    padding: 2em 5rem;
 }
 
 .form-section {
@@ -16,6 +16,22 @@
     margin: 0;;
 }
 
+.calendar-container h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 1rem 0;
+}
+
+.schedule-section h3 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 1rem 0;
+}
+
+.calendar-container .p-inputtext {
+    font-size: 1.4rem;
+}
+
 
 .add-to-cart-button {
     background-color: var(--main-blue);
@@ -24,8 +40,9 @@
     border-radius: 10px;
     border: none;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 1.5rem;
     cursor: pointer;
+    margin-top: 1rem;
 }
   
 .add-to-cart-button:hover {

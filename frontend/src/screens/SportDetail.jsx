@@ -102,16 +102,15 @@ const SportDetail = () => {
             <div className="info-section">
                 <div className="sport-header">
                     <h1>{installations.length > 0 ? installations[installation].name : ''}</h1>
-                    <p>{installations.length > 0 ? installations[installation].description : ''}</p>
                 </div>
                 <div className="form-section">
                     <div className="calendar-container">
-                        <h3>Fecha</h3>
+                        <h3>Fecha:</h3>
                         
                         <Calendar value={selectedDate} onChange={(e) => setSelectedDate(e.value)} />
                     </div>
                     <div className="schedule-section">
-                        <h3>Horario</h3>
+                        <h3>Horario:</h3>
                         <Schedule 
                             value={selectedSchedule} 
                             onChange={(hour) => setSelectedSchedule(hour)} 

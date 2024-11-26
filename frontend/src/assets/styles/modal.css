@@ -19,6 +19,7 @@
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1.6rem;
 }
 
 .modal h4 {
@@ -38,7 +39,7 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.5rem;
 }
 
 .blue {
@@ -56,7 +57,7 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.5rem;
 }
 
 .cancel-button:hover {
@@ -65,7 +66,7 @@
 
 .error-message {
     color: red;
-    font-size: 14px;
+    font-size: 1.5rem;
     margin-top: 10px;
 }
 

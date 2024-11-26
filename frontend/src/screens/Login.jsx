@@ -1,5 +1,8 @@
 import { useContext, useState } from "react";
 import './../assets/styles/screens/Login.css';
+import puebloImage from './../assets/images/pueblo.jpeg';
+import Weather from '../components/layout/Weather';
+import Contacto from '../components/layout/Contacto';
 import { AuthContext } from './../auth/AuthContext';
 
 const Login = () => {
@@ -45,14 +48,17 @@ const Login = () => {
     return(
         <div className="login-container">
             <div className="login-header">
-                <h1>Bienvenido</h1>
-                <h3>
-                    Este es el sistema de reservas  gratuito para todos los censados en 
-                    Villanueva de las Cruces
-                </h3>
-                <h3>
-                    Para poder acceder deberemos comprobar si estás censado. 
-                </h3>
+                <h1>¡Bienvenido/a, cruceño/a!</h1>
+                <h2>¿Listo/a para reservar tu pista?</h2>
+                <div className="description-container">
+                    <h3>
+                        Este es el sistema de reservas  gratuito para todos los censados en 
+                        Villanueva de las Cruces.
+                    </h3>
+                    <h3>
+                        Para poder acceder deberemos comprobar si estás censado. 
+                    </h3>
+                </div>
             </div>
 
             <div className="login-form">
@@ -70,6 +76,16 @@ const Login = () => {
             
             {error && <p style={{ color: 'red' }}>{error}</p>}
 
+            <div className="pueblo-image-container">
+                <img 
+                    src={puebloImage}
+                    alt="Pueblo de Villanueva de las Cruces" 
+                    className="pueblo-image"
+                />
+            </div>
+
+            <Weather />
+            <Contacto />
         </div>
     )
 
