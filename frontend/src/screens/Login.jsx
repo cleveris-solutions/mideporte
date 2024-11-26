@@ -25,7 +25,7 @@ const Login = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Invalid code');
+                throw new Error('Este DNI no pertenece a nadie censado en Villanueva de las Cruces.');
             }
 
             const data = await response.json();
@@ -34,16 +34,6 @@ const Login = () => {
             setError(err.message);
         }
     };
-
-    const handleSubmitTemporary = (e) => {
-        e.preventDefault();
-
-        setTimeout(() => {
-            const simulatedResponse = { user: { name: 'Javier Santos', dni: DNI } };
-            login(simulatedResponse); 
-        }, 500); 
-    };
-    
 
     return(
         <div className="login-container">
