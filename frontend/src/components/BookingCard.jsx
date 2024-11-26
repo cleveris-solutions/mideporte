@@ -23,7 +23,7 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
             });
 
             if (!response.ok) {
-                throw new Error('Invalid code');
+                throw new Error('Ha ocurrido un error');
             }
 
             const data = await response.json();
