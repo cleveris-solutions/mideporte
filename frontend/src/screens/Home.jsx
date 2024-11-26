@@ -42,7 +42,7 @@ const Home = () => {
 
 			<div className='cards-container'>
 				{sports.map((sport, index) => (
-					<Link to={`/deportes/${sport.name}`} style={{textDecoration:'none'}} key={index}>
+					<Link to={`/deportes/${sport.name}`} class={"sport-link"} style={{textDecoration:'none'}} key={index}>
 						<SportCard 
 							sport={sport.name} 
 							description={sport.description} 
