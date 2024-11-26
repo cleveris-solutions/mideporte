@@ -10,6 +10,13 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from .authentication.authentication import DNIAuthentication
 
+
+ERROR = 'error'
+DNI_REQUIRED_MESSAGE = 'Se requiere DNI para autenticación'
+DNI_UNREGISTERED_MESSAGE = 'DNI no registrado'
+USER_SUSPENDED_MESSAGE = 'Cuenta suspendida'
+
+
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -26,14 +33,14 @@ class AuthenticateDNI(APIView):
         dni = request.data.get('DNI','').strip()
         
         if not dni:
-                return Response({'error': 'Se requiere DNI para autenticación'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({ERROR: DNI_REQUIRED_MESSAGE}, status=status.HTTP_400_BAD_REQUEST)
 
         user = DNIAuthentication.authenticate(self,DNI=dni)
         if user is None:
-            return Response({'error': 'DNI no registrado'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({ERROR: DNI_UNREGISTERED_MESSAGE}, status=status.HTTP_401_UNAUTHORIZED)
 
         if user.suspended:
-            return Response({'error': 'Cuenta suspendida'}, status=status.HTTP_403_FORBIDDEN)
+            return Response({ERROR: USER_SUSPENDED_MESSAGE}, status=status.HTTP_403_FORBIDDEN)
         
         
         token,_ = Token.objects.get_or_create(user=user)
