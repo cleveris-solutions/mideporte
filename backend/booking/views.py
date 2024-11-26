@@ -11,6 +11,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 BOOKINGS = "bookings"
 BOOKING_ID = 'booking_id'
@@ -138,8 +139,15 @@ def create_booking(request):
 def cancel_booking(request, booking_id):
     try:
         booking = Booking.objects.get(id=booking_id)
+        
+        # Check user ownership
         if booking.user != request.user:
             raise Exception("You are not allowed to cancel this booking")
+        
+        # Check if the booking is not set one hour after the cancellation
+        if booking.start - timedelta(hours=1) < timezone.now():
+            raise Exception("You can't cancel a booking one hour before the start time")
+
         booking.status = BookingStatus.Cancelled
         booking.save()
     except Booking.DoesNotExist:
