@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../auth/AuthContext';
+import Contacto from '../components/layout/Contacto';
+import Weather from '../components/layout/Weather';
 import './../assets/styles/screens/BookingsList.css';
 import BookingCard from './../components/BookingCard';
-import Weather from '../components/layout/Weather';
-import Contacto from '../components/layout/Contacto';
-import { sportImages } from './../utils/imageMapping';
-import { AuthContext } from '../auth/AuthContext';
 
 const BookingsList = () => {
   const [bookings, setBookings] = useState([]);
@@ -31,12 +30,13 @@ const BookingsList = () => {
     }, [user]);
 
     const sortedBookings = bookings.sort((a, b) => new Date(b.start) - new Date(a.start));
+    console.log(sortedBookings)
 
     return (
         <div className="bookings-list">
             <header className="bookings-header">
                 <h1>Tu lista de reservas</h1>
-                <h2>Estas son tus reservas confirmadas (en azul) y canceladas (en rojo).</h2>
+                <h2>Estas son tus reservas confirmadas (en azul), canceladas (en rojo) y antiguas (en gris)</h2>
             </header>
 
             <div className="bookings-container">
@@ -51,10 +51,6 @@ const BookingsList = () => {
                         status={booking.status}
                     />
 				))}
-            </div>
-            <div className='bottom'>
-                <Weather />
-                <Contacto />
             </div>
         </div>
     );

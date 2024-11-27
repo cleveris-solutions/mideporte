@@ -25,6 +25,10 @@
     background: linear-gradient(to bottom right, var(--light-blue), #8ab4f9);
 }
 
+.gray {
+    background: var(--light-gray);
+}
+
 
 .hover-effect:hover {
   transform: scale(1.05);
