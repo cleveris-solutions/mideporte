@@ -26,7 +26,7 @@ class SportListTests(TestCase):
         
         # Verify that the returned installations are unique
         installations = response.json()
-        self.assertEqual(len(installations), 4)  
+        self.assertEqual(len(installations), 5)  
         
     def test_get_installations_by_type_success(self):
         # Make the request to the endpoint
@@ -37,8 +37,8 @@ class SportListTests(TestCase):
         
         # Verify that the returned installations are unique
         installations = response.json()
-        self.assertEqual(len(installations), 1)
-        self.assertEqual(installations[0]['name'], 'Piscina Municipal')
+        self.assertEqual(len(installations), 2)
+        self.assertEqual(installations[0]['name'], 'Piscina Municipal 1')
         self.assertEqual(installations[0]['type']['id'], 1)
         self.assertEqual(installations[0]['description'], 'Piscina municipal de verano')
         self.assertEqual(installations[0]['availability'], True)
