@@ -23,7 +23,8 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
             });
 
             if (!response.ok) {
-                throw new Error('Ha ocurrido un error');
+                const errorMessage = await response.json();
+                throw new Error(errorMessage.error);
             }
 
             const data = await response.json();
@@ -63,7 +64,7 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
 				</div>
 				{status !== 'Cancelada' && 
                 date && new Date(date).toISOString() > new Date(Date.now() + 120 * 60 * 1000).toISOString() && 
-                    <div className='booking-cancel' onClick={() => {setIsModalOpen(true)}}>
+                    <div className='booking-cancel' onClick={() => {setIsModalOpen(true); setError(null)}}>
                         &#10005;
                     </div>
                 }

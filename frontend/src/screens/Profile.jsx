@@ -19,7 +19,7 @@ const Profile = () => {
         <div className="profile">
             <header className="profile-header">
                 <h1>Perfil de {user.user.name}</h1>
-                <button onClick={() => {setIsModalOpen(true)}}>Cerrar sesión</button>
+                <button onClick={() => {setIsModalOpen(true); ; setError(null)}}>Cerrar sesión</button>
             </header>
 
             <ul className="profile-info">
