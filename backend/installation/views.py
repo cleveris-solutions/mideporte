@@ -9,9 +9,9 @@ from django.shortcuts import get_object_or_404
 from booking.models import Booking, BookingStatus
 
 
-INSTALLATION_NOT_FOUND_MSG = 'Installation not found'
+INSTALLATION_NOT_FOUND_MSG = 'Instalación no encontrada'
 ERROR_KEY = 'error'
-INVALID_DATE_FORMAT_MSG = 'Invalid date format'
+INVALID_DATE_FORMAT_MSG = 'Formato de fecha inválido'
 
 
 @require_http_methods(["GET"])
