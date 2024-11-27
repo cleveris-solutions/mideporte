@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './../assets/styles/screens/BookingsList.css';
 import BookingCard from './../components/BookingCard';
+import Weather from '../components/layout/Weather';
+import Contacto from '../components/layout/Contacto';
 import { sportImages } from './../utils/imageMapping';
 import { AuthContext } from '../auth/AuthContext';
 
@@ -33,8 +35,8 @@ const BookingsList = () => {
     return (
         <div className="bookings-list">
             <header className="bookings-header">
-                <h1>Lista de reservas</h1>
-                <h2>Estas son tus reservas confirmadas.</h2>
+                <h1>Tu lista de reservas</h1>
+                <h2>Estas son tus reservas confirmadas (en azul) y canceladas (en rojo).</h2>
             </header>
 
             <div className="bookings-container">
@@ -49,6 +51,10 @@ const BookingsList = () => {
                         status={booking.status}
                     />
 				))}
+            </div>
+            <div className='bottom'>
+                <Weather />
+                <Contacto />
             </div>
         </div>
     );

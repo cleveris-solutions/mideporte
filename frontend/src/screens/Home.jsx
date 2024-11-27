@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from './../auth/AuthContext';
-import { sportImages } from './../utils/imageMapping';
 import SportCard from './../components/SportCard';
+import Weather from '../components/layout/Weather';
+import Contacto from '../components/layout/Contacto';
 import './../assets/styles/screens/Home.css';
 
 const Home = () => {
@@ -36,13 +37,13 @@ const Home = () => {
 	return (
 		<div className='home-container'>
 			<div className='home-header'>
-				<h1>Reserva ya tu pista</h1>
-				<h2>Reservas gratuitas para todos los censados en Villanueva de las Cruces</h2>
+				<h1>{user.user.name}, aquí puedes reservar pista</h1>
+				<h2>Estas son las instalaciones disponibles, selecciona la que te interese.</h2>
 			</div>
 
 			<div className='cards-container'>
 				{sports.map((sport, index) => (
-					<Link to={`/deportes/${sport.name}`} style={{textDecoration:'none'}} key={index}>
+					<Link to={`/deportes/${sport.name}`} class={"sport-link"} style={{textDecoration:'none'}} key={index}>
 						<SportCard 
 							sport={sport.name} 
 							description={sport.description} 
@@ -52,6 +53,9 @@ const Home = () => {
 					</Link>
 				))}
 			</div>
+
+			<Weather />
+			<Contacto />
 		</div>
 	);
 

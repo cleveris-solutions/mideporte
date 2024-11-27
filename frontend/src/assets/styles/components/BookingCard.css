@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px 0;   
+    margin: 1rempx 0;   
 }
 
 .booking-card {
@@ -48,6 +48,7 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 18px;
+    font-size: 1.2rem;
 }
 
 .booking-details h3 {
@@ -57,16 +58,15 @@
 }
 
 .booking-details p {
-    margin: 0.5rem 0;
+    margin: 0.3rem 0;
     color: #5b89d5;
-    font-size: 1.1rem;
     font-weight: normal;
 }
 
 .booking-date {
-    color: #5c5a5a;
-    font-size: 1.2em;
+    color: #444343;
     font-weight: bold;
+    font-size: 1.1em;
 }
 
 .booking-cancel {

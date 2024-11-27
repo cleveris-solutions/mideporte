@@ -1,29 +1,45 @@
 .login-container {
-    padding: 2rem 5rem;
+    padding: 0.5rem 5rem;
+    padding-bottom: 5rem;
 }
 
 .login-container h1{
-    font-size: 5rem;
+    font-size: 3.3rem;
     font-weight: 700;
+    margin-bottom: 0px;
+}
+
+.login-container h2 {
+    font-size: 1.7rem;
 }
 
 .login-container h3 {
     font-weight: 500;
     font-style: normal;
+    font-size: 1.4rem;
+}
+
+.description-container h3 {
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
 }
 
 .login-form {
-    padding: 2rem 0rem;
+    padding: 0.5rem 0rem;
+    padding-bottom: 0.2rem;
 }
 
 .login-container input{
-    height: 45px;
+    height: 3rem;
     padding: 10px;
     border-radius: 10px;
     background-color: var(--light-gray);
     border: 2px solid var(--light-gray);
     color: var(--dark-gray);
-    font-size: 1rem;
+    font-size: 1.5rem;
     outline: none;
     transition: border-color 0.3s;
     box-sizing: border-box;
@@ -43,11 +59,28 @@
     border-radius: 10px;
     border: none;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 1.5rem;
     cursor: pointer;
 }
 
 .login-form button:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease; 
+}
+
+p {
+    font-size: 1.3rem;
+    margin-top: 1rem;
+}
+
+.pueblo-image-container {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.pueblo-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }

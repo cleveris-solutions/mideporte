@@ -39,7 +39,7 @@
         "model": "installation.installation",
         "pk": 1,
         "fields": {
-            "name": "Piscina Municipal",
+            "name": "Piscina Municipal 1",
             "type": 1,
             "availability": true,
             "description": "Piscina municipal de verano"
@@ -49,7 +49,7 @@
         "model": "installation.installation",
         "pk": 2,
         "fields": {
-            "name": "Pista de Pádel 1",
+            "name": "Pista de Pádel",
             "type": 2,
             "availability": true,
             "description": "Pista de pádel cubierta"
@@ -59,7 +59,7 @@
         "model": "installation.installation",
         "pk": 3,
         "fields": {
-            "name": "Campo de Fútbol",
+            "name": "Campo de Fútbol 'La Cañada'",
             "type": 3,
             "availability": true,
             "description": "Campo de fútbol de césped natural"
@@ -73,6 +73,16 @@
             "type": 4,
             "availability": false,
             "description": "Pista de baloncesto al aire libre"
+        }
+    },
+    {
+        "model": "installation.installation",
+        "pk": 5,
+        "fields": {
+            "name": "Piscina Municipal 2",
+            "type": 1,
+            "availability": true,
+            "description": "Piscina municipal de verano"
         }
     }
 ]

@@ -27,14 +27,14 @@
 }
 
 .sport-title {
-    font-size: 1.25em;
+    font-size: 1.7em;
     font-weight: bold;
     color: #333;
     margin: 0;
 }
 
 .sport-description {
-    font-size: 1em;
+    font-size: 1.4em;
     font-weight: bold;
     color: var(--main-blue);
     margin: 8px 0 0;
