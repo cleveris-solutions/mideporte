@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import './../assets/styles/screens/Profile.css';
 import './../assets/styles/modal.css';
