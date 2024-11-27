@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-42yclwyi)8)sgl)o%hh$0e+w_pl*52p$=fp+zu67(w-=w#f=b@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0']
 
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -87,15 +89,12 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',  # Usamos el backend de MySQL para MariaDB
-        'NAME': 'mideportedb',                    # Nombre de la base de datos
-        'USER': 'mideporte_user',              # Usuario de la base de datos
-        'PASSWORD': 'mideporte_password',       # Contraseña del usuario
-        'HOST': 'localhost',                   # Dirección del servidor de la base de datos
-        'PORT': '3306',
-        'TEST': {
-            'NAME': 'mideportedb_test',
-        }
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': os.getenv('DB_NAME', 'mideportedb_womenfuel'),  
+        'USER': os.getenv('DB_USER', 'mideportedb_womenfuel'),  
+        'PASSWORD': os.getenv('DB_PASSWORD', ''), 
+        'HOST': os.getenv('DB_HOST', 'fk7-o.h.filess.io'),         
+        'PORT': os.getenv('DB_PORT', 3305),              
     }
 }
 
@@ -164,7 +163,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -174,9 +173,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user.user'
 
 
-import os
-
 # Config of media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
