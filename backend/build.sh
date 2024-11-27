@@ -18,3 +18,6 @@ cd ../frontend
 
 npm install
 npm run build
+
+cd ../backend
+python manage.py collectstatic --noinput
