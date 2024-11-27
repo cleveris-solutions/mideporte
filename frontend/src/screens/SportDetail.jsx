@@ -64,7 +64,8 @@ const SportDetail = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Algo salió mal');
+                const errorMessage = await response.json();
+                throw new Error(errorMessage.error);
             } else {
                 setError("")
                 setIsModalOpen(false)
@@ -131,7 +132,7 @@ const SportDetail = () => {
                             </div>
                         )}
                     </div>
-                    <button className="add-to-cart-button" onClick={() => {setIsModalOpen(true)}}>Reservar</button>
+                    <button className="add-to-cart-button" onClick={() => {setIsModalOpen(true); setError(null)}}>Reservar</button>
 
                     {isModalOpen && (
                     <div className="modal-overlay">

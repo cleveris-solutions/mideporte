@@ -24,8 +24,10 @@ const Login = () => {
                 body: JSON.stringify({ DNI: DNI }),
             });
 
+            
             if (!response.ok) {
-                throw new Error('Este DNI no pertenece a nadie censado en Villanueva de las Cruces.');
+                const errorMessage = await response.json();
+                throw new Error(errorMessage.error);
             }
 
             const data = await response.json();
@@ -34,6 +36,7 @@ const Login = () => {
             setError(err.message);
         }
     };
+
 
     return(
         <div className="login-container">
