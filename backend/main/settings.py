@@ -26,7 +26,7 @@ ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = 'django-insecure-42yclwyi)8)sgl)o%hh$0e+w_pl*52p$=fp+zu67(w-=w#f=b@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['mideporte-4tvg.onrender.com','0.0.0.0']
 
