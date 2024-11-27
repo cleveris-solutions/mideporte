@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Schedule from '../components/Schedule';
 import SportCard from '../components/SportCard';
-import { sportImages } from './../utils/imageMapping';
 import { AuthContext } from './../auth/AuthContext';
 
 
@@ -43,7 +42,7 @@ const SportDetail = () => {
         };
     
         fetchSport();
-    }, [sportName]);
+    }, [sportName,user.token]);
 
 	const handleBook = async (e) => {
         e.preventDefault();
@@ -69,8 +68,6 @@ const SportDetail = () => {
                 setIsModalOpen(false)
                 window.location.reload();
             }
-
-            const data = await response.json();
         } catch (err) {
 			// Error handling might be improved
             setError(err.message);

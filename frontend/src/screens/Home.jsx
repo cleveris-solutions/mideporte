@@ -32,7 +32,7 @@ const Home = () => {
         };
 
         fetchSports();
-    }, []);
+    }, [user.token]);
     
 	return (
 		<div className='home-container'>

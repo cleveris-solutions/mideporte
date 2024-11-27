@@ -26,7 +26,7 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
                 throw new Error('Ha ocurrido un error');
             }
 
-            const data = await response.json();
+            
             window.location.reload();
         } catch (err) {
 			// Error handling might be improved

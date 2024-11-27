@@ -3,7 +3,6 @@ import './../assets/styles/screens/BookingsList.css';
 import BookingCard from './../components/BookingCard';
 import Weather from '../components/layout/Weather';
 import Contacto from '../components/layout/Contacto';
-import { sportImages } from './../utils/imageMapping';
 import { AuthContext } from '../auth/AuthContext';
 
 const BookingsList = () => {

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import './../assets/styles/screens/Profile.css';
 import './../assets/styles/modal.css';
@@ -6,7 +6,7 @@ import './../assets/styles/modal.css';
 const Profile = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [error, setError] = useState('');
+    const [error] = useState('');
     
     const { logout } = useContext(AuthContext);
     const { user } = useContext(AuthContext);

@@ -43,7 +43,7 @@ const Schedule = ({ value, onChange , date, installationId}) => {
         fetchAvailableHours();
         fetchEveryHours();
         
-    }, [date, installationId]);
+    }, [date, installationId,user.token]);
 
     const handleHourClick = (hour) => {
         if (hour !== value) {
