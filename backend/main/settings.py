@@ -16,6 +16,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -24,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-42yclwyi)8)sgl)o%hh$0e+w_pl*52p$=fp+zu67(w-=w#f=b@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['mideporte-4tvg.onrender.com']
+ALLOWED_HOSTS = ['mideporte-4tvg.onrender.com','0.0.0.0']
 
 
 # Application definition
@@ -61,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'main.urls'
@@ -129,6 +132,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:7777",
     "http://127.0.0.1:7777",
+    "http://localhost:3000",
+    "https://mideporte-4tvg.onrender.com", 
 ]
 
 REST_FRAMEWORK = {
@@ -145,6 +150,7 @@ REST_FRAMEWORK = {
     ),
 
 }
+
 
 
 
@@ -178,3 +184,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATICFILES_DIRS = [
+    os.path.join(ROOT_DIR,'frontend/build/static')
+]
+
+TEMPLATES[0]['DIRS'] = [
+    os.path.join(ROOT_DIR,'frontend/build')
+]

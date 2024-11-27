@@ -12,3 +12,9 @@ python populate_db.py
 
 # Apply any outstanding database migrations
 python manage.py migrate
+
+#frontend setup
+cd ../frontend
+
+npm install
+npm run build
