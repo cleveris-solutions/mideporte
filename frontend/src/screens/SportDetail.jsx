@@ -97,7 +97,7 @@ const SportDetail = () => {
                     <SportCard 
                         sport={sportName} 
                         description={installations.length > 0 ? installations[0].type.description : ''} 
-                        image={installations.length > 0 ? installations[0].type.image : ''} 
+                        image={installations.length > 0 ? `/static${installations[0].type.image}` : ''} 
                     />
                 </div>
                 <div className="info-section">

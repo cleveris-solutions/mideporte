@@ -47,7 +47,7 @@ const Home = () => {
 						<SportCard 
 							sport={sport.name} 
 							description={sport.description} 
-							image={sport.image} 
+							image={`/static${sport.image}`}
 							hoverEffect={true}
 						/>
 					</Link>

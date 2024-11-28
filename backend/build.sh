@@ -20,4 +20,7 @@ npm install
 npm run build
 
 cd ../backend
+
+cp -r media/installation_types static/media
+
 python manage.py collectstatic --noinput

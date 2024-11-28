@@ -180,13 +180,14 @@ AUTH_USER_MODEL = 'user.user'
 
 
 # Config of media files
-MEDIA_URL = '/media/'
+MEDIA_URL = '/media/' #Render does not deal with media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
-    os.path.join(ROOT_DIR,'frontend/build/static'),
+    os.path.join(ROOT_DIR,'frontend/build/static')
 ]
 
 TEMPLATES[0]['DIRS'] = [

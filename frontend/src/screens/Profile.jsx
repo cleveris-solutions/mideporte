@@ -6,7 +6,7 @@ import './../assets/styles/modal.css';
 const Profile = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [error] = useState('');
+    const [error,setError] = useState('');
     
     const { logout } = useContext(AuthContext);
     const { user } = useContext(AuthContext);

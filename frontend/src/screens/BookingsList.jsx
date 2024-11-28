@@ -1,12 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
-import Contacto from '../components/layout/Contacto';
-import Weather from '../components/layout/Weather';
 import './../assets/styles/screens/BookingsList.css';
 import BookingCard from './../components/BookingCard';
-import Weather from '../components/layout/Weather';
-import Contacto from '../components/layout/Contacto';
-import { AuthContext } from '../auth/AuthContext';
 
 const BookingsList = () => {
   const [bookings, setBookings] = useState([]);
@@ -50,7 +45,7 @@ const BookingsList = () => {
                         installation={booking.installation.name} 
                         details={booking.details} 
                         date={booking.start} 
-                        image={booking.installation.type.image} 
+                        image={`/static${booking.installation.type.image}`}
                         status={booking.status}
                     />
 				))}
