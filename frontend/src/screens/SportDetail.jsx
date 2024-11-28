@@ -1,7 +1,6 @@
 import { Calendar } from 'primereact/calendar';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Contacto from '../components/layout/Contacto';
 import Weather from '../components/layout/Weather';
 import Schedule from '../components/Schedule';
 import SportCard from '../components/SportCard';
@@ -48,7 +47,6 @@ const SportDetail = () => {
 
 	const handleBook = async (e) => {
         e.preventDefault();
-        console.log(user)
         try {
             const response = await fetch(`/api/v1/bookings/`, {
                 method: 'POST',
@@ -157,7 +155,6 @@ const SportDetail = () => {
             </div>
             <div className='bottom'>
                 <Weather />
-                <Contacto />
             </div>
 
         </div>

@@ -44,8 +44,6 @@ const Schedule = ({ value, onChange , date, installationId}) => {
         fetchEveryHours();
         
     }, [date, installationId]);
-
-    console.log(availableHours);
     
     const handleHourClick = (hour) => {
         if (hour !== value) {
