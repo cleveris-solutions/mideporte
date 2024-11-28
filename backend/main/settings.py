@@ -183,12 +183,10 @@ AUTH_USER_MODEL = 'user.user'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
     os.path.join(ROOT_DIR,'frontend/build/static'),
-    MEDIA_ROOT
 ]
 
 TEMPLATES[0]['DIRS'] = [
