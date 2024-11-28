@@ -188,6 +188,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
     os.path.join(ROOT_DIR,'frontend/build/static'),
+    MEDIA_ROOT
 ]
 
 TEMPLATES[0]['DIRS'] = [
