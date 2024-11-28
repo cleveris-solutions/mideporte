@@ -95,7 +95,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': os.getenv('DB_NAME', 'mideportedb_womenfuel'),  
         'USER': os.getenv('DB_USER', 'mideportedb_womenfuel'),  
-        'PASSWORD': os.getenv('DB_PASSWORD', ''), 
+        'PASSWORD': os.getenv('DB_PASSWORD', '0d4190da69e8e8a362ef00b48813eb103ef05c0a'), 
         'HOST': os.getenv('DB_HOST', 'fk7-o.h.filess.io'),         
         'PORT': os.getenv('DB_PORT', 3305),              
     }
@@ -183,10 +183,11 @@ AUTH_USER_MODEL = 'user.user'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
-    os.path.join(ROOT_DIR, 'frontend', 'build', 'static')  # Cambia esta línea
+    os.path.join(ROOT_DIR,'frontend/build/static'),
 ]
 
 TEMPLATES[0]['DIRS'] = [
