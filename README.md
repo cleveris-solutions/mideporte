@@ -18,12 +18,25 @@ git clone https://github.com/cleveris-solutions/mideporte.git
 cd mideporte
 ```
 
+Variables de entorno:
+```bash
+cp .env.example .env
+```
+
 ### 2. Entorno virtual
-#### 2.1 Crear y activar el entorno virtual
+#### 2.1 Crear el entorno virtual
 ```bash
 python3 -m venv venv
-En linux: source venv/bin/activate  
-En Windows: venv\Scripts\activate
+```
+#### Activar el entorno virtual
+En linux: 
+```bash
+source venv/bin/activate  
+```
+O en Windows: 
+
+```bash
+venv\Scripts\activate
 ```
 
 #### 2.2 Instalar dependencias del entorno virtual
@@ -52,7 +65,7 @@ Valores a introducir tras ejecutar el comando `mysql_secure_installation`:
 ```
 A continuación, para continuar con la creación de la base de datos:
 ```bash
-sudo mariabd -u root -p
+sudo mariadb -u root -p
 ```
 Usar la contraseña de root que se ha configurado anteriormente. Una vez dentro de la consola de MariaDB, para crear las bases de datos ejecutar el siguiente comando:
 ```sql
@@ -78,7 +91,7 @@ Para crear las bases de datos, ejecutar el siguiente comando:
 source resources/database.sql;
 ```
 #### 3.3 Migraciones
-Crear las migraciones que reflejan los cambios en los modelos de la base de datos. No es necesario ejecutar este comando si no se han realizado cambios en los modelso desde la última vez que se ejecutó:
+Crear las migraciones que reflejan los cambios en los modelos de la base de datos. No es necesario ejecutar este comando si no se han realizado cambios en los modelos desde la última vez que se ejecutó:
 ```bash
 cd backend
 python manage.py makemigrations
@@ -92,13 +105,18 @@ Aplicar las migraciones a la base de datos:
 python manage.py migrate
 ```
 
-Nota: durante la ejecución de `manage.py` migrate puede aparecer un error `Table 'django_admin_log' already exists`. Para solucionarlo, seguir los siguietes pasos:
+Nota: durante la ejecución de `manage.py` migrate puede aparecer un error `Table 'django_admin_log' already exists`. Para solucionarlo, seguir los siguientes pasos:
 ```bash
 mariadb -u root -p
 DROP TABLE django_admin_log;
 source resources/database.sql;
 exit;
 python manage.py migrate
+```
+
+#### 3.4 Popular la base de datos
+```bash
+python populate_db.py
 ```
 
 ### 4. Iniciar el servidor de backend
