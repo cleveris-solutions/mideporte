@@ -23,7 +23,8 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
             });
 
             if (!response.ok) {
-                throw new Error('Ha ocurrido un error');
+                const errorMessage = await response.json();
+                throw new Error(errorMessage.error);
             }
 
             
@@ -35,14 +36,23 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
         }
     };
 	
-    const buildDate = (date) => {
-        const dateObj = new Date(date);
-        return `${dateObj.getDate()}/${dateObj.getMonth() + 1}/${dateObj.getFullYear()} ${dateObj.getHours()}:${dateObj.getMinutes() < 10 ? '0' + dateObj.getMinutes() : dateObj.getMinutes()}`;
+    function buildDate(isoDate) {
+        const date = new Date(isoDate);
+    
+        const day = date.getUTCDate().toString().padStart(2, '0');
+        const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+        const year = date.getUTCFullYear();
+        const hours = date.getUTCHours().toString().padStart(2, '0');
+        const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    
+        return `${day}/${month}/${year} ${hours}:${minutes}`;
     }
-
+    
     return (
 		<div className='booking-card-container'> 
-			<div className={`booking-card ${status === 'Cancelada' ? 'gradient-red' : 'gradient-blue'}`}>
+			<div className={`booking-card ${date && new Date(date).toISOString() < new Date(Date.now() + 60 * 60 * 1000).toISOString()
+                ? 'gray'
+                : status === 'Cancelada' ? 'gradient-red' : 'gradient-blue'}`}>
 
 				<img className="booking-image" src={image} alt={installation} />
 				
@@ -52,10 +62,13 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
 					<span className="booking-date">{buildDate(date)}</span>
                     <span>{status}</span>
 				</div>
-				
-				{status !== 'Cancelada' && <div className='booking-cancel' onClick={() => {setIsModalOpen(true)}}>
-					&#10005;
-				</div>}
+				{status !== 'Cancelada' && 
+                date && new Date(date).toISOString() > new Date(Date.now() + 120 * 60 * 1000).toISOString() && 
+                    <div className='booking-cancel' onClick={() => {setIsModalOpen(true); setError(null)}}>
+                        &#10005;
+                    </div>
+                }
+
 
                 
 

@@ -1,6 +1,8 @@
 import { Calendar } from 'primereact/calendar';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Contacto from '../components/layout/Contacto';
+import Weather from '../components/layout/Weather';
 import Schedule from '../components/Schedule';
 import SportCard from '../components/SportCard';
 import { AuthContext } from './../auth/AuthContext';
@@ -62,7 +64,8 @@ const SportDetail = () => {
             });
 
             if (!response.ok) {
-                throw new Error('Algo salió mal');
+                const errorMessage = await response.json();
+                throw new Error(errorMessage.error);
             } else {
                 setError("")
                 setIsModalOpen(false)
@@ -88,66 +91,73 @@ const SportDetail = () => {
     }
     
     return (
-        <div className="sport-detail-container">
-            <div className="card-section">
-                <SportCard 
-                    sport={sportName} 
-                    description={installations.length > 0 ? installations[0].type.description : ''} 
-                    image={installations.length > 0 ? installations[0].type.image : ''} 
-                />
-            </div>
-            <div className="info-section">
-                <div className="sport-header">
-                    <h1>{installations.length > 0 ? installations[installation].name : ''}</h1>
+        <div className="sport-detail-screen">
+            <div className="sport-detail-container">
+                <div className="card-section">
+                    <SportCard 
+                        sport={sportName} 
+                        description={installations.length > 0 ? installations[0].type.description : ''} 
+                        image={installations.length > 0 ? installations[0].type.image : ''} 
+                    />
                 </div>
-                <div className="form-section">
-                    <div className="calendar-container">
-                        <h3>Fecha:</h3>
-                        
-                        <Calendar value={selectedDate} onChange={(e) => setSelectedDate(e.value)} />
+                <div className="info-section">
+                    <div className="sport-header">
+                        <h1>{installations.length > 0 ? installations[installation].name : ''}</h1>
                     </div>
-                    <div className="schedule-section">
-                        <h3>Horario:</h3>
-                        <Schedule 
-                            value={selectedSchedule} 
-                            onChange={(hour) => setSelectedSchedule(hour)} 
-                            date={selectedDate.toLocaleDateString("en-CA")}
-                            installationId={installations.length > 0 ? installations[installation].id : 1}/>
-                    </div>
-                    {installations.length > 1 && (
-                        <div>
-                            <h3>{displayInstallation()}</h3>
-                            <form>
-                                <select name="installation" id="installation" onChange={(e) => setInstallation(e.target.value)}>
-                                    {installations.map((inst, index) => (
-                                        <option key={index} value={index}>{displayInstallation()}: {index + 1}</option>
-                                    ))}
-                                </select>
-                            </form>
+                    <div className="form-section">
+                        <div className="calendar-container">
+                            <h3>Fecha:</h3>
+                            <Calendar value={selectedDate} onChange={(e) => setSelectedDate(e.value)} />
                         </div>
+                        <div className="schedule-section">
+                            <h3>Horario:</h3>
+                            <Schedule 
+                                value={selectedSchedule} 
+                                onChange={(hour) => setSelectedSchedule(hour)} 
+                                date={selectedDate.toLocaleDateString("en-CA")}
+                                installationId={installations.length > 0 ? installations[installation].id : 1}/>
+                        </div>
+                        {installations.length > 1 && (
+                            <div>
+                                <h3>{displayInstallation()}</h3>
+                                <form>
+                                    <select name="installation" id="installation" onChange={(e) => setInstallation(e.target.value)}>
+                                        {installations.map((inst, index) => (
+                                            <option key={index} value={index}>{displayInstallation()}: {index + 1}</option>
+                                        ))}
+                                    </select>
+                                </form>
+                            </div>
+                        )}
+                    </div>
+                    <button className="add-to-cart-button" onClick={() => {setIsModalOpen(true); setError(null)}}>Reservar</button>
+
+                    {isModalOpen && (
+                    <div className="modal-overlay">
+                        <div className="modal">
+                            <h4>¿Quiere confirmar la reserva?</h4>
+                            {error && <p className="error-message">{error}</p>}
+                            <div className="modal-buttons">
+                                <button className="cancel-button" onClick={() => setIsModalOpen(false)}>
+                                    Cancelar
+                                </button>
+
+                                <button className="confirm-button blue" onClick={handleBook}>
+                                    Confirmar
+                                </button>
+                            </div>
+                        </div>
+                    </div>  
                     )}
+
                 </div>
-                <button className="add-to-cart-button" onClick={() => {setIsModalOpen(true)}}>Reservar</button>
-
-                {isModalOpen && (
-                <div className="modal-overlay">
-                    <div className="modal">
-                        <h4>¿Quiere confirmar la reserva?</h4>
-                        {error && <p className="error-message">{error}</p>}
-                        <div className="modal-buttons">
-                            <button className="cancel-button" onClick={() => setIsModalOpen(false)}>
-                                Cancelar
-                            </button>
-
-                            <button className="confirm-button blue" onClick={handleBook}>
-                                Confirmar
-                            </button>
-                        </div>
-                    </div>
-                </div>  
-                )}
-
+                
             </div>
+            <div className='bottom'>
+                <Weather />
+                <Contacto />
+            </div>
+
         </div>
 
     )
