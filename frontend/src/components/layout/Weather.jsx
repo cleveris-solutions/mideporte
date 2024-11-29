@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import './../../assets/styles/components/layout/Weather.css';
 
 const Weather = () => {
   useEffect(() => {
@@ -24,13 +25,14 @@ const Weather = () => {
   }, []);
 
   return (
-    <div className="weather-all">
+    <>
       <hr className="separator" />
-      <h2>El tiempo en Villanueva de la Cruces en tiempo real:</h2>
-      <p>Para que puedas comprobarlo antes de ir y así evitar sorpresas.</p>
-      <div id="weather-widget-container"></div>
-      <hr className="separator" />
+      <div className="weather-all">
+        <h2>El tiempo atmosférico en Villanueva de la Cruces en tiempo real:</h2>
+        <p>Para que puedas comprobarlo antes de ir y así evitar sorpresas.</p>
+        <div id="weather-widget-container"></div>
     </div>
+    </>
   );
 };
 

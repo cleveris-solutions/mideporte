@@ -9,6 +9,7 @@ import Home from './screens/Home';
 import Login from './screens/Login';
 import SportDetail from './screens/SportDetail';
 import Profile from './screens/Profile';
+import Help from './screens/Help';
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -25,6 +26,7 @@ function App() {
               <Route path="/deportes" element={<Home />} />
               <Route path="/deportes/:sportName" element={<SportDetail />} />
               <Route path="/reservas" element={<BookingsList />} />
+              <Route path="/ayuda" element={<Help />} />
               <Route path="/perfil" element={<Profile />} />
             </Routes>
           </div>
@@ -32,6 +34,7 @@ function App() {
       ) : (
         <Routes>
           <Route path="*" element={<Login />} />
+          <Route path="/ayuda" element={<Help />} />
         </Routes>
       )}
       <Footer />

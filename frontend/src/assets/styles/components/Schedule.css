@@ -27,6 +27,6 @@
 }
 
 .hour-button.selected {
-    background-color: var(--main-blue);
+    background-color: #0473bc;
     color: #fff;
 }

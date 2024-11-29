@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from './../auth/AuthContext';
 import SportCard from './../components/SportCard';
 import Weather from '../components/layout/Weather';
-import Contacto from '../components/layout/Contacto';
 import './../assets/styles/screens/Home.css';
 
 const Home = () => {
@@ -55,7 +54,6 @@ const Home = () => {
 			</div>
 
 			<Weather />
-			<Contacto />
 		</div>
 	);
 
