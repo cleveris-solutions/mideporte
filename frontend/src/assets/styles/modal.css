@@ -50,6 +50,10 @@
     background-color: var(--main-red);
 }
 
+.green {
+    background-color: #4CAF50;
+}
+
 .cancel-button {
     background-color: #ddd;
     color: black;

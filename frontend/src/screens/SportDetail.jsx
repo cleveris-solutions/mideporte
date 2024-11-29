@@ -6,7 +6,6 @@ import Schedule from '../components/Schedule';
 import SportCard from '../components/SportCard';
 import { AuthContext } from './../auth/AuthContext';
 
-
 import 'primeicons/primeicons.css';
 import 'primereact/resources/primereact.min.css';
 import 'primereact/resources/themes/saga-blue/theme.css';
@@ -18,6 +17,8 @@ const SportDetail = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedSchedule, setSelectedSchedule] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [reservationSuccess, setReservationSuccess] = useState(false);
+    const [scheduleUpdateKey, setScheduleUpdateKey] = useState(0);
     const [error, setError] = useState('');
     
     const { sportName } = useParams();
@@ -67,7 +68,16 @@ const SportDetail = () => {
             } else {
                 setError("")
                 setIsModalOpen(false)
-                window.location.reload();
+                setReservationSuccess(true);
+
+                // To update the schedule component when a reservation is made (and not the entire page)
+                setScheduleUpdateKey((prevKey) => prevKey + 1);
+    
+                setTimeout(() => {
+                    setReservationSuccess(false);
+                }, 5000);
+                
+                //window.location.reload()
             }
 
             const data = await response.json();
@@ -112,6 +122,7 @@ const SportDetail = () => {
                         <div className="schedule-section">
                             <h3>Horario:</h3>
                             <Schedule 
+                                key={scheduleUpdateKey}
                                 value={selectedSchedule} 
                                 onChange={(hour) => setSelectedSchedule(hour)} 
                                 date={selectedDate.toLocaleDateString("en-CA")}
@@ -142,13 +153,30 @@ const SportDetail = () => {
                                     Cancelar
                                 </button>
 
-                                <button className="confirm-button blue" onClick={handleBook}>
+                                {!error &&
+                                <button className="confirm-button green" onClick={handleBook}>
                                     Confirmar
-                                </button>
+                                </button>}
                             </div>
                         </div>
                     </div>  
                     )}
+
+                    {reservationSuccess && (
+                        <div className="modal-overlay">
+                            <div className="modal success-modal">
+                                <h4>¡Reserva exitosa!</h4>
+                                <p>Tu reserva se ha realizado con éxito.</p>
+                                <button
+                                    className="confirm-button green"
+                                    onClick={() => setReservationSuccess(false)}
+                                >
+                                    Vale, gracias
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
 
                 </div>
                 
