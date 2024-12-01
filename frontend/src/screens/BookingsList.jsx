@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/AuthContext';
 import './../assets/styles/screens/BookingsList.css';
 import BookingCard from './../components/BookingCard';
+import { Link } from 'react-router-dom';
 
 const BookingsList = () => {
   const [bookings, setBookings] = useState([]);
-
   const { user } = useContext(AuthContext);
     
     useEffect(() => {
@@ -28,7 +28,6 @@ const BookingsList = () => {
     }, [user]);
 
     const sortedBookings = bookings.sort((a, b) => new Date(b.start) - new Date(a.start));
-    console.log(sortedBookings)
 
     return (
         <div className="bookings-list">
@@ -38,18 +37,31 @@ const BookingsList = () => {
             </header>
 
             <div className="bookings-container">
-                {sortedBookings.map((booking) => (
-                    <BookingCard 
-                        key={booking.id} 
-                        bookingId={booking.id}
-                        installation={booking.installation.name} 
-                        details={booking.details} 
-                        date={booking.start} 
-                        image={`/static${booking.installation.type.image}`}
-                        status={booking.status}
-                    />
-				))}
+                
             </div>
+
+            <div className="bookings-container">
+                {sortedBookings.length > 0 ? (
+                    sortedBookings.map((booking) => (
+                        <BookingCard 
+                            key={booking.id} 
+                            bookingId={booking.id}
+                            installation={booking.installation.name} 
+                            details={booking.details} 
+                            date={booking.start} 
+                            image={`/static${booking.installation.type.image}`}
+                            status={booking.status}
+                        />
+                    ))
+                ) : (
+                    <div className="no-bookings">
+                        <p>Todavía no tienes ninguna reserva.</p>
+                        <Link to="/deportes">Para crear una reserva, pulsa aquí</Link>
+                    </div>
+                    )}
+            </div>
+
+
         </div>
     );
 };

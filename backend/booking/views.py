@@ -24,7 +24,7 @@ ERROR_MISSING_FIELD = "Falta el campo: {field}"
 ERROR_INVALID_DATA = "Datos inválidos. Por favor, revise los campos."
 SUCCESS_BOOKING_CREATED = "Instalación reservada con éxito."
 SUCCESS_BOOKING_CANCELLED = "Reserva cancelada con éxito."
-INVALID_DATE_FORMAT_MSG = "Formato de fecha inválido. Por favor, use el formato: YYYY-MM-DDTHH:MM:SSZ"
+INVALID_DATE_FORMAT_MSG = "Por favor, seleccione una hora."
 
 @extend_schema()
 @require_http_methods(["GET"])
@@ -66,6 +66,11 @@ def get_bookings_by_user(request, dni):
 def check_installation_disponibility(installation, date):
     availibility = True
     hour = date.strftime('%H:%M')
+
+    # Check if the date is not in the past
+    if date < timezone.now():
+        availability = False
+
     # Check if the date is among the installation open hours
     available_hours = installation.get_open_hours(date.date()) 
     if hour not in available_hours:

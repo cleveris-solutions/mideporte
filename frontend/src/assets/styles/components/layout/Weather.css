@@ -1,0 +1,30 @@
+.weather-all {
+  margin: 1.5rem 0;
+  text-align: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-top: 1rem;
+}
+
+.weather-all p {
+  font-size: 1.4rem;
+}
+ 
+#weather-widget-container {
+  margin: 0 auto;
+  max-width: 48rem;
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 8px;
+  transform: scale(1.2);
+  transform-origin: center;
+}
+
+.separator {
+  border: none;
+  border-top: 2px solid #ddd;
+  background-color: transparent;
+  margin: 2.5rem 0;
+}

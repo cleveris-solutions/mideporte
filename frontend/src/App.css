@@ -82,7 +82,7 @@ footer {
 }
 
 .navbar-links a:hover {
-  color: var(--main-blue);
+  color: #0473bc;
 }
 
 @media (max-width: 300px) {
@@ -110,7 +110,7 @@ footer {
 
 .navbar-main-link {
   display: inline-block; 
-  background-color: var(--main-blue);
+  background-color: #0473bc;
   color: white;
   padding: 0.5rem 1.4rem;
   border-radius: 10px;
@@ -125,34 +125,4 @@ footer {
 
 .navbar-main-highlight {
   color: white;
-}
-
-.weather-all {
-  margin-top: 1.3rem;
-  text-align: center;
-}
-
-#weather-widget-container {
-  margin: 1rem auto;
-  max-width: 48rem;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-}
-
-#weather-widget-container h2 {
-  font-size: 1.8rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-#weather-widget-container .ancho {
-  width: 100%;
-}
-
-.separator {
-  margin-bottom: 1.5rem;
-  border: none;
-  border-top: 1px solid #ddd;
-  background-color: transparent;
 }

@@ -1,17 +1,18 @@
 import React from 'react';
 import './../../assets/styles/components/layout/Contacto.css';
 
-const Contact = () => {
+const Contacto = () => {
   return (
     <div className="contact-info">
       <h2>Contacto del Ayuntamiento</h2>
       <p>Si tienes algún problema con tus reservas o necesitas asistencia, no dudes en contactarnos o en visitarnos:</p>
         <div className="contact-details">
-        <ul>
-          <li><strong>Dirección:</strong> Calle Constitucion, 2, 21592 Villanueva de las Cruces, Huelva</li>
-          <li><strong>Teléfono:</strong> 959 57 80 01</li>
-          <li><strong>Correo electrónico:</strong> ayto@villanuevadelascruces.es</li>
-        </ul>
+          <ul>
+            <li><strong>Dirección:</strong> Calle Constitucion, 2, 21592 Villanueva de las Cruces, Huelva</li>
+            <li><strong>Teléfono:</strong> 959 57 80 01</li>
+            <li><strong>Correo electrónico:</strong> ayto@villanuevadelascruces.es</li>
+            <li><strong>Horario:</strong> Lunes a Viernes de 8:00 a 14:00</li>
+          </ul>
         <div className="map-container">
           <iframe
             title="Mapa Villanueva de las Cruces"
@@ -28,4 +29,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Contacto;
