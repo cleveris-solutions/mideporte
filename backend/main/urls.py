@@ -16,7 +16,7 @@ urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/swagger/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/docs/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    re_path(r'^(?!api/v1/).*$', TemplateView.as_view(template_name='index.html')),
+    re_path(r'^(?!api/).*$', TemplateView.as_view(template_name='index.html')),
 ]
 
 if settings.DEBUG:
