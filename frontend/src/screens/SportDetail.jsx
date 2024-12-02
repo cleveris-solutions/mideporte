@@ -150,12 +150,19 @@ const SportDetail = () => {
                                 installationId={installations.length > 0 ? installations[installation].id : 1}/>
                         </div>
                         {installations.length > 1 && (
-                            <div>
-                                <h3>{displayInstallation()}</h3>
+                            <div className="calle-section">
+                                <h3>Calle:</h3>
                                 <form>
-                                    <select name="installation" id="installation" onChange={(e) => setInstallation(e.target.value)}>
+                                    <select 
+                                        name="installation" 
+                                        id="installation" 
+                                        className="installation-select" 
+                                        onChange={(e) => setInstallation(e.target.value)}
+                                    >
                                         {installations.map((inst, index) => (
-                                            <option key={index} value={index}>{displayInstallation()}: {index + 1}</option>
+                                            <option key={index} value={index}>
+                                                {displayInstallation()}: {index + 1}
+                                            </option>
                                         ))}
                                     </select>
                                 </form>
