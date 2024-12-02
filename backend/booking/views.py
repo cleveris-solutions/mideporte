@@ -68,8 +68,10 @@ def check_installation_disponibility(installation, date):
     hour = date.strftime('%H:%M')
 
     # Check if the date is not in the past
-    if date < timezone.now():
-        availability = False
+    current_time = timezone.now()
+    current_time = timezone.localtime(current_time)
+    if date < current_time:
+        availibility = False
 
     # Check if the date is among the installation open hours
     available_hours = installation.get_open_hours(date.date()) 
@@ -151,7 +153,9 @@ def cancel_booking(request, booking_id):
             raise Exception("No puedes cancelar esta reserva porque no eres el propietario.")
         
         # Check if the booking is not set one hour after the cancellation
-        if booking.start - timedelta(hours=1) < timezone.now():
+        current_time = timezone.now()
+        current_time = timezone.localtime(current_time)
+        if booking.start - timedelta(hours=1) < current_time:
             raise Exception("No puedes cancelar la reserva una hora antes de la hora de inicio.")
 
         booking.status = BookingStatus.Cancelled
