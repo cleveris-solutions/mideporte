@@ -74,7 +74,8 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
 				</div>
 				{status !== 'Cancelada' && 
                 date && dateWithinOneHour(date) && 
-                    <div className='booking-cancel' onClick={() => {setIsModalOpen(true); setError(null)}}>
+                    <div className='booking-cancel' onClick={() => {setIsModalOpen(true); setError(null)}}
+                        title="Cancelar reserva">
                         &#10005;
                     </div>
                 }
