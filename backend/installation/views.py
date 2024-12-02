@@ -82,7 +82,7 @@ def available_schedule(request, installation_id, date):
         booked_hours = [hour.strftime('%H:%M') for hour in booked_hours]
         
         current_time = current_date.time()
-        available_hours = [hour for hour in open_hours if hour not in booked_hours and datetime.strptime(hour, '%H:%M').time() >= current_time]
+        available_hours = [hour for hour in open_hours if hour not in booked_hours and (datetime.strptime(hour, '%H:%M').time() >= current_time or date > current_date.date())]
         
         return JsonResponse(available_hours, safe=False)
     else:
