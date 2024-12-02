@@ -99,7 +99,7 @@ const SportDetail = () => {
     const buildStartDate = (date, schedule) => {
         return date.toLocaleDateString("en-CA") + "T" + schedule + ":00Z";
     }
-    
+
     return (
         <div className="sport-detail-screen">
             <div className="sport-detail-container">

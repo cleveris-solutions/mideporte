@@ -48,12 +48,21 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     }
 
+    const isDateInThePast = (date) => {
+        return new Date(date) < new Date(Date.now())
+    }
+
+    const dateWithinOneHour = (date) => {
+        return new Date(date) > new Date(Date.now() + 3600000)
+    }
 
     return (
 		<div className='booking-card-container'> 
-			<div className={`booking-card ${date && new Date(date) < new Date(Date.now() + 60 * 60 * 1000)
+			<div className={`booking-card ${date && isDateInThePast(date)
                 ? 'gray'
-                : status === 'Cancelada' ? 'gradient-red' : 'gradient-blue'}`}>
+                : status === 'Cancelada' 
+                    ? 'gradient-red' 
+                    : 'gradient-blue'}`}>
 
 				<img className="booking-image" src={image} alt={installation} />
 				
@@ -64,7 +73,7 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
                     <span>{status}</span>
 				</div>
 				{status !== 'Cancelada' && 
-                date && new Date(date).toISOString() > new Date(Date.now() + 120 * 60 * 1000).toISOString() && 
+                date && dateWithinOneHour(date) && 
                     <div className='booking-cancel' onClick={() => {setIsModalOpen(true); setError(null)}}>
                         &#10005;
                     </div>

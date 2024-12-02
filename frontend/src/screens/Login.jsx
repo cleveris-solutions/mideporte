@@ -25,8 +25,6 @@ const Login = () => {
             });
 
             const cookies = document.cookie.split(';');
-            console.log(cookies);
-
             
             if (!response.ok) {
                 const errorMessage = await response.json();
