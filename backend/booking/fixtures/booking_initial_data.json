@@ -5,7 +5,7 @@
         "fields": {
             "user": "12345678B",
             "installation": 1,
-            "start": "2023-10-01T09:00:00Z",
+            "start": "2023-10-01T09:00:00",
             "status": "Programada"
         }
     },
@@ -15,7 +15,7 @@
         "fields": {
             "user": "98765432A",
             "installation": 2,
-            "start": "2023-10-01T10:00:00Z",
+            "start": "2023-10-01T10:00:00",
             "status": "Programada"
         }
     },
@@ -25,7 +25,7 @@
         "fields": {
             "user": "12345678B",
             "installation": 3,
-            "start": "2023-10-01T11:00:00Z",
+            "start": "2023-10-01T11:00:00",
             "status": "Cancelada"
         }
     },
@@ -35,7 +35,7 @@
         "fields": {
             "user": "98765432A",
             "installation": 4,
-            "start": "2023-10-01T12:00:00Z",
+            "start": "2023-10-01T12:00:00",
             "status": "Finalizada"
         }
     }

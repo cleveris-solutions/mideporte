@@ -11,7 +11,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 from datetime import datetime, timedelta
-from django.utils import timezone
+
 
 BOOKINGS = "bookings"
 BOOKING_ID = 'booking_id'
@@ -68,8 +68,8 @@ def check_installation_disponibility(installation, date):
     hour = date.strftime('%H:%M')
 
     # Check if the date is not in the past
-    current_time = timezone.now()
-    current_time = timezone.localtime(current_time)
+    current_time = datetime.now()
+
     if date < current_time:
         availibility = False
 
@@ -153,8 +153,7 @@ def cancel_booking(request, booking_id):
             raise Exception("No puedes cancelar esta reserva porque no eres el propietario.")
         
         # Check if the booking is not set one hour after the cancellation
-        current_time = timezone.now()
-        current_time = timezone.localtime(current_time)
+        current_time = datetime.now()
         if booking.start - timedelta(hours=1) < current_time:
             raise Exception("No puedes cancelar la reserva una hora antes de la hora de inicio.")
 
