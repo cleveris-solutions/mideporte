@@ -39,7 +39,7 @@
         "model": "installation.installation",
         "pk": 1,
         "fields": {
-            "name": "Piscina Municipal 1",
+            "name": "Piscina Municipal (calle 1)",
             "type": 1,
             "availability": true,
             "description": "Piscina municipal de verano"
@@ -79,7 +79,7 @@
         "model": "installation.installation",
         "pk": 5,
         "fields": {
-            "name": "Piscina Municipal 2",
+            "name": "Piscina Municipal (calle 2)",
             "type": 1,
             "availability": true,
             "description": "Piscina municipal de verano"
