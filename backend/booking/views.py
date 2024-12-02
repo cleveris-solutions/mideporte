@@ -12,6 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.utils.timezone import make_aware
 
 BOOKINGS = "bookings"
 BOOKING_ID = 'booking_id'
@@ -66,10 +67,13 @@ def get_bookings_by_user(request, dni):
 def check_installation_disponibility(installation, date):
     availibility = True
     hour = date.strftime('%H:%M')
+    
+    if not timezone.is_aware(date):
+        date = timezone.make_aware(date)
 
     # Check if the date is not in the past
     if date < timezone.now():
-        availability = False
+        availibility = False
 
     # Check if the date is among the installation open hours
     available_hours = installation.get_open_hours(date.date()) 
@@ -119,7 +123,8 @@ def create_booking(request):
     start_time = data['start_time']
     try:
         installation = Installation.objects.get(id=installation_id)
-        date = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%SZ').replace(minute=0, second=0, microsecond=0)
+        naive_date = datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%SZ').replace(minute=0, second=0, microsecond=0)
+        date = make_aware(naive_date)
         # Check if the user can book the installation at the selected date and time
         check_installation_disponibility(installation, date)
         user_booking_viability(user, installation, date)
@@ -149,6 +154,9 @@ def cancel_booking(request, booking_id):
         # Check user ownership
         if booking.user != request.user:
             raise Exception("No puedes cancelar esta reserva porque no eres el propietario.")
+        
+        if not timezone.is_aware(booking.start):
+            booking.start = timezone.make_aware(booking.start)
         
         # Check if the booking is not set one hour after the cancellation
         if booking.start - timedelta(hours=1) < timezone.now():
