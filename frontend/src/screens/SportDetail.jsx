@@ -117,7 +117,7 @@ const SportDetail = () => {
                     <div className="form-section">
                         <div className="calendar-container">
                             <h3>Fecha:</h3>
-                            <Calendar value={selectedDate} onChange={(e) => setSelectedDate(e.value)} />
+                            <Calendar value={selectedDate} dateFormat="dd-mm-yy" onChange={(e) => setSelectedDate(e.value)}/>
                         </div>
                         <div className="schedule-section">
                             <h3>Horario:</h3>
