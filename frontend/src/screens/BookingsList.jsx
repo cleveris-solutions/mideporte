@@ -27,7 +27,28 @@ const BookingsList = () => {
         
     }, [user]);
 
-    const sortedBookings = bookings.sort((a, b) => new Date(b.start) - new Date(a.start));
+    const isDateInThePast = (date) => {
+        return new Date(date) < new Date(Date.now())
+    }
+
+    const updatedBookings = bookings.map(booking => {
+        if (booking.status === "Programada" && isDateInThePast(booking.start)) {
+            return { ...booking, status: "Finalizada" };
+        }
+        return booking;
+    });
+
+    const sortedBookings = updatedBookings.sort((a, b) => {
+        if (a.status === "Programada" && b.status !== "Programada") {
+            return -1; // a va antes que b
+        } else if (a.status !== "Programada" && b.status === "Programada") {
+            return 1; // b va antes que a
+        } else if (a.status === "Programada" && b.status === "Programada") {
+            return new Date(a.start) - new Date(b.start);
+        }
+        return new Date(b.start) - new Date(a.start);
+    });
+    
 
     return (
         <div className="bookings-list">
