@@ -33,7 +33,7 @@ const BookingsList = () => {
         <div className="bookings-list">
             <header className="bookings-header">
                 <h1>Tu lista de reservas</h1>
-                <h2>Estas son tus reservas confirmadas (en azul), canceladas (en rojo) y antiguas (en gris)</h2>
+                <h2>Estas son tus reservas <span style={{color:"var(--main-blue"}}>confirmadas</span>, <span style={{color:"var(--main-red)"}}>canceladas</span> y antiguas</h2>
             </header>
 
             <div className="bookings-container">

@@ -1,7 +1,8 @@
+import Cookies from 'js-cookie';
 import { useContext, useState } from "react";
-import './../assets/styles/screens/Login.css';
-import puebloImage from './../assets/images/pueblo.jpeg';
 import Weather from '../components/layout/Weather';
+import puebloImage from './../assets/images/pueblo.jpeg';
+import './../assets/styles/screens/Login.css';
 import { AuthContext } from './../auth/AuthContext';
 
 const Login = () => {
@@ -12,9 +13,9 @@ const Login = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+        clearCookies();
     
         try {
-            // TODO: Add the URL of the backend
             const response = await fetch(`/api/v1/users/authenticate/`, {
                 method: 'POST',
                 headers: {
@@ -23,6 +24,7 @@ const Login = () => {
                 body: JSON.stringify({ DNI: DNI }),
             });
 
+            const cookies = document.cookie.split(';');
             
             if (!response.ok) {
                 const errorMessage = await response.json();
@@ -34,6 +36,15 @@ const Login = () => {
         } catch (err) {
             setError(err.message);
         }
+    };
+
+    const clearCookies = () => {
+        const cookies = document.cookie.split(';');
+        cookies.forEach(cookie => {
+            const eqPos = cookie.indexOf('=');
+            const name = eqPos > -1 ? cookie.substring(0, eqPos).trim() : cookie.trim();
+            Cookies.remove(name);
+        });
     };
 
 

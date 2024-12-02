@@ -73,13 +73,20 @@ def available_schedule(request, installation_id, date):
     except ValueError:
         return JsonResponse({ERROR_KEY: INVALID_DATE_FORMAT_MSG}, status=400)
     
-    open_hours = installation.get_open_hours(date)
-    booked_hours = Booking.objects.filter(installation=installation, start__date=date, status=BookingStatus.Scheduled).values_list('start', flat=True)
-    booked_hours = [hour.strftime('%H:%M') for hour in booked_hours]
+    current_date = datetime.now()
+    # current_date = localtime(current_date)
     
-    available_hours = [hour for hour in open_hours if hour not in booked_hours]
-    
-    return JsonResponse(available_hours, safe=False)
+    if date >= current_date.date():
+        open_hours = installation.get_open_hours(date)
+        booked_hours = Booking.objects.filter(installation=installation, start__date=date, status=BookingStatus.Scheduled).values_list('start', flat=True)
+        booked_hours = [hour.strftime('%H:%M') for hour in booked_hours]
+        
+        current_time = current_date.time()
+        available_hours = [hour for hour in open_hours if hour not in booked_hours and (datetime.strptime(hour, '%H:%M').time() >= current_time or date > current_date.date())]
+        
+        return JsonResponse(available_hours, safe=False)
+    else:
+        return JsonResponse([], safe=False)
 
 
 

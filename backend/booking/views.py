@@ -159,7 +159,8 @@ def cancel_booking(request, booking_id):
             booking.start = timezone.make_aware(booking.start)
         
         # Check if the booking is not set one hour after the cancellation
-        if booking.start - timedelta(hours=1) < timezone.now():
+        current_time = datetime.now()
+        if booking.start - timedelta(hours=1) < current_time:
             raise Exception("No puedes cancelar la reserva una hora antes de la hora de inicio.")
 
         booking.status = BookingStatus.Cancelled
