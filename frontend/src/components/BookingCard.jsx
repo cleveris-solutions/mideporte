@@ -79,9 +79,6 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
                     </div>
                 }
 
-
-                
-
                 {isModalOpen && (
                 <div className="modal-overlay">
                     <div className="modal">
