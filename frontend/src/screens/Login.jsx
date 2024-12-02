@@ -23,8 +23,6 @@ const Login = () => {
                 },
                 body: JSON.stringify({ DNI: DNI }),
             });
-
-            const cookies = document.cookie.split(';');
             
             if (!response.ok) {
                 const errorMessage = await response.json();
