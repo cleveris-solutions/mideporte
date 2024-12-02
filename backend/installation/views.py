@@ -7,6 +7,7 @@ from rest_framework.decorators import permission_classes, api_view
 from .serializers import InstallationTypeSerializer, InstallationSerializer
 from django.shortcuts import get_object_or_404
 from booking.models import Booking, BookingStatus
+from django.utils.timezone import now, localtime
 
 
 INSTALLATION_NOT_FOUND_MSG = 'Instalación no encontrada'
@@ -73,13 +74,20 @@ def available_schedule(request, installation_id, date):
     except ValueError:
         return JsonResponse({ERROR_KEY: INVALID_DATE_FORMAT_MSG}, status=400)
     
-    open_hours = installation.get_open_hours(date)
-    booked_hours = Booking.objects.filter(installation=installation, start__date=date, status=BookingStatus.Scheduled).values_list('start', flat=True)
-    booked_hours = [hour.strftime('%H:%M') for hour in booked_hours]
+    current_date = now()
+    current_date = localtime(current_date)
     
-    available_hours = [hour for hour in open_hours if hour not in booked_hours]
+    if date >= current_date.date():
+        open_hours = installation.get_open_hours(date)
+        booked_hours = Booking.objects.filter(installation=installation, start__date=date, status=BookingStatus.Scheduled).values_list('start', flat=True)
+        booked_hours = [hour.strftime('%H:%M') for hour in booked_hours]
+        
+        current_time = current_date.time()
+        available_hours = [hour for hour in open_hours if hour not in booked_hours and datetime.strptime(hour, '%H:%M').time() >= current_time]
     
-    return JsonResponse(available_hours, safe=False)
+        return JsonResponse(available_hours, safe=False)
+    else:
+        return JsonResponse([], safe=False)
 
 
 
