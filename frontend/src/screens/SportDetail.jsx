@@ -135,21 +135,7 @@ const SportDetail = () => {
                     <div className="sport-header">
                         <h1>{installations.length > 0 ? installations[installation].name : ''}</h1>
                     </div>
-                    <div className="form-section">
-                        <div className="calendar-container">
-                            <h3>Fecha:</h3>
-                            <Calendar value={selectedDate} dateFormat="dd-mm-yy" onChange={(e) => setSelectedDate(e.value)}/>
-                        </div>
-                        <div className="schedule-section">
-                            <h3>Horario:</h3>
-                            <Schedule 
-                                key={scheduleUpdateKey}
-                                value={selectedSchedule} 
-                                onChange={(hour) => setSelectedSchedule(hour)} 
-                                date={selectedDate.toLocaleDateString("en-CA")}
-                                installationId={installations.length > 0 ? installations[installation].id : 1}/>
-                        </div>
-                        {installations.length > 1 && (
+                    {installations.length > 1 && (
                             <div className="calle-section">
                                 <h3>Calle:</h3>
                                 <form>
@@ -168,8 +154,25 @@ const SportDetail = () => {
                                 </form>
                             </div>
                         )}
+                    <div className="form-section">
+                        <div className="calendar-container">
+                            <h3>Fecha:</h3>
+                            <Calendar value={selectedDate} dateFormat="dd-mm-yy" 
+                                onChange={(e) => setSelectedDate(e.value)} minDate={new Date(Date.now())} showIcon inline/>
+                        </div>
+                        <div className="schedule-section">
+                            <h3>Horario:</h3>
+                            <Schedule 
+                                key={scheduleUpdateKey}
+                                value={selectedSchedule} 
+                                onChange={(hour) => setSelectedSchedule(hour)} 
+                                date={selectedDate.toLocaleDateString("en-CA")}
+                                installationId={installations.length > 0 ? installations[installation].id : 1}/>
+                        
+                            <button className="add-to-cart-button" onClick={() => {setIsModalOpen(true); setError(null)}}>Reservar</button>
+                        </div>
+                        
                     </div>
-                    <button className="add-to-cart-button" onClick={() => {setIsModalOpen(true); setError(null)}}>Reservar</button>
 
                     {isModalOpen && (
                     <div className="modal-overlay">

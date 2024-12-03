@@ -7,26 +7,36 @@
 }
 
 .hour-button {
-    padding: 2px 20px;
-    font-size: 1.3rem;
+    padding: 3px 20px;
+    font-size: 1.4rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 7px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
+.hour-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease; 
+}
+
 .hour-button.available {
-    background-color: #f0f0f0;
-    color: #000;
+    background-color: #4ea845;
+    color: #fff;
 }
 
 .hour-button.unavailable {
-    background-color: #dcdcdc;
-    color: #777;
+    background-color: #E53935;
+    color: #fff;
     cursor: not-allowed;
 }
 
 .hour-button.selected {
     background-color: #0473bc;
     color: #fff;
+}
+
+.hour-button.alreadybookedbyme {
+    background-color: #FF9800;
+    color: #000;
 }
