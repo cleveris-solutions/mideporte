@@ -1,7 +1,7 @@
 import { addLocale, locale } from 'primereact/api';
 import { Calendar } from 'primereact/calendar';
-import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect, useState} from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Weather from '../components/layout/Weather';
 import Schedule from '../components/Schedule';
 import SportCard from '../components/SportCard';
@@ -21,7 +21,8 @@ const SportDetail = () => {
     const [reservationSuccess, setReservationSuccess] = useState(false);
     const [scheduleUpdateKey, setScheduleUpdateKey] = useState(0);
     const [error, setError] = useState('');
-    
+
+    const navigate = useNavigate();
     const { sportName } = useParams();
     const { user } = useContext(AuthContext);
     
@@ -122,8 +123,20 @@ const SportDetail = () => {
     }
 
     return (
-        <div className="sport-detail-screen">
-            <div className="sport-detail-container">
+        <div className="sport-screen">
+            <div className='sport-top-container'>
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    ← Volver
+                </button>
+                <div className="sport-title">
+                    <h1>{installations.length > 0 ? installations[installation].name : ''}</h1>
+                </div>
+                <button className="add-to-cart-button" onClick={() => {setIsModalOpen(true); setError(null)}}>
+                    Reservar
+                </button>
+            </div>
+
+            <div className='sport-bottom-container'>
                 <div className="card-section">
                     <SportCard 
                         sport={sportName} 
@@ -131,87 +144,81 @@ const SportDetail = () => {
                         image={installations.length > 0 ? installations[0].type.image : ''} 
                     />
                 </div>
-                <div className="info-section">
-                    <div className="sport-header">
-                        <h1>{installations.length > 0 ? installations[installation].name : ''}</h1>
-                    </div>
+
+                <div className="center-section">
                     {installations.length > 1 && (
-                            <div className="calle-section">
-                                <h3>Calle:</h3>
-                                <form>
-                                    <select 
-                                        name="installation" 
-                                        id="installation" 
-                                        className="installation-select" 
-                                        onChange={(e) => setInstallation(e.target.value)}
-                                    >
-                                        {installations.map((inst, index) => (
-                                            <option key={index} value={index}>
-                                                {displayInstallation()}: {index + 1}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </form>
-                            </div>
-                        )}
-                    <div className="form-section">
-                        <div className="calendar-container">
-                            <h3>Fecha:</h3>
-                            <Calendar value={selectedDate} dateFormat="dd-mm-yy" 
-                                onChange={(e) => setSelectedDate(e.value)} minDate={new Date(Date.now())} showIcon inline/>
-                        </div>
-                        <div className="schedule-section">
-                            <h3>Horario:</h3>
-                            <Schedule 
-                                key={scheduleUpdateKey}
-                                value={selectedSchedule} 
-                                onChange={(hour) => setSelectedSchedule(hour)} 
-                                date={selectedDate.toLocaleDateString("en-CA")}
-                                installationId={installations.length > 0 ? installations[installation].id : 1}/>
-                        
-                            <button className="add-to-cart-button" onClick={() => {setIsModalOpen(true); setError(null)}}>Reservar</button>
-                        </div>
-                        
-                    </div>
-
-                    {isModalOpen && (
-                    <div className="modal-overlay">
-                        <div className="modal">
-                            <h4>¿Quiere confirmar la reserva?</h4>
-                            {error && <p className="error-message">{error}</p>}
-                            <div className="modal-buttons">
-                                <button className="cancel-button" onClick={() => setIsModalOpen(false)}>
-                                    Cancelar
-                                </button>
-
-                                {!error &&
-                                <button className="confirm-button green" onClick={handleBook}>
-                                    Confirmar
-                                </button>}
-                            </div>
-                        </div>
-                    </div>  
-                    )}
-
-                    {reservationSuccess && (
-                        <div className="modal-overlay">
-                            <div className="modal success-modal">
-                                <h4>¡Reserva exitosa!</h4>
-                                <p>Tu reserva se ha realizado con éxito.</p>
-                                <button
-                                    className="confirm-button green"
-                                    onClick={() => setReservationSuccess(false)}
+                        <div className="calle-container">
+                            <h3>Calle:</h3>
+                            <form>
+                                <select 
+                                    name="installation" 
+                                    id="installation" 
+                                    className="installation-select" 
+                                    onChange={(e) => setInstallation(e.target.value)}
                                 >
-                                    Vale, gracias
-                                </button>
-                            </div>
+                                    {installations.map((inst, index) => (
+                                        <option key={index} value={index}>
+                                            {displayInstallation()}: {index + 1}
+                                        </option>
+                                    ))}
+                                </select>
+                            </form>
                         </div>
                     )}
-
-
+                    
+                    <div className="calendar-container">
+                        <h3>Fecha:</h3>
+                        <Calendar value={selectedDate} dateFormat="dd-mm-yy" 
+                            onChange={(e) => setSelectedDate(e.value)} minDate={new Date(Date.now())} showIcon inline/>
+                    </div>
                 </div>
+
+                <div className="schedule-section">
+                    <h3>Horario:</h3>
+                    <Schedule 
+                        key={scheduleUpdateKey}
+                        value={selectedSchedule} 
+                        onChange={(hour) => setSelectedSchedule(hour)} 
+                        date={selectedDate.toLocaleDateString("en-CA")}
+                        installationId={installations.length > 0 ? installations[installation].id : 1}/>
                 
+                </div>
             </div>
+
+            {isModalOpen && (
+                <div className="modal-overlay">
+                    <div className="modal">
+                        <h4>¿Quiere confirmar la reserva?</h4>
+                        {error && <p className="error-message">{error}</p>}
+                        <div className="modal-buttons">
+                            <button className="cancel-button" onClick={() => setIsModalOpen(false)}>
+                                Cancelar
+                            </button>
+
+                            {!error &&
+                            <button className="confirm-button green" onClick={handleBook}>
+                                Confirmar
+                            </button>}
+                        </div>
+                    </div>
+                </div>  
+                )}
+
+            {reservationSuccess && (
+                <div className="modal-overlay">
+                    <div className="modal success-modal">
+                        <h4>¡Reserva exitosa!</h4>
+                        <p>Tu reserva se ha realizado con éxito.</p>
+                        <button
+                            className="confirm-button green"
+                            onClick={() => setReservationSuccess(false)}
+                        >
+                            Vale, gracias
+                        </button>
+                    </div>
+                </div>
+            )}
+
             <div className='bottom'>
                 <Weather />
             </div>
