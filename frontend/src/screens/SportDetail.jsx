@@ -182,6 +182,21 @@ const SportDetail = () => {
                         date={selectedDate.toLocaleDateString("en-CA")}
                         installationId={installations.length > 0 ? installations[installation].id : 1}/>
                 
+                    <div className="legend-container">
+                        <div className="legend-item">
+                            <span className="legend-color available"></span>
+                            <span>Disponible</span>
+                        </div>
+                        <div className="legend-item">
+                            <span className="legend-color not-available"></span>
+                            <span>No disponible</span>
+                        </div>
+                        <div className="legend-item">
+                            <span className="legend-color selected"></span>
+                            <span>Seleccionada</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
