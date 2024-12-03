@@ -6,6 +6,7 @@
 }
 
 .booking-card {
+    position: relative;
     display: flex;
     justify-content: space-between; 
     align-items: center;
@@ -92,4 +93,31 @@
 
 .booking-cancel:hover {
     transform: scale(1.2);
+}
+
+.highlight-today {
+    border-radius: 10px;
+    border: 2px solid #ffcc00;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+    background: linear-gradient(to bottom right, #fff3cd, #ffe69c);
+}
+
+
+.title-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.today-badge-inline {
+    background: linear-gradient(45deg, #d4af37, #ffd700);
+    color: white;
+    font-weight: bold;
+    padding: 0.2rem 0.8rem;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    margin-left: 0.2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
