@@ -97,8 +97,6 @@
 
 .highlight-today {
     border-radius: 10px;
-    border: 2px solid #ffcc00;
-    box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
     background: linear-gradient(to bottom right, #fff3cd, #ffe69c);
 }
 
