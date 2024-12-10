@@ -4,6 +4,7 @@ import './../assets/styles/modal.css';
 import { AuthContext } from '../auth/AuthContext';
 
 const BookingCard = ({bookingId, installation, details, date, image, status }) => {
+    const isToday = new Date(date).toDateString() === new Date().toDateString() && new Date(date) > new Date();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 	const [error, setError] = useState('');
@@ -57,7 +58,7 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
     }
 
     return (
-		<div className='booking-card-container'> 
+		<div className={`booking-card-container ${isToday ? 'highlight-today' : ''}`}> 
 			<div className={`booking-card ${date && isDateInThePast(date)
                 ? 'gray'
                 : status === 'Cancelada' 
@@ -67,20 +68,23 @@ const BookingCard = ({bookingId, installation, details, date, image, status }) =
 				<img className="booking-image" src={image} alt={installation} />
 				
 				<div className="booking-details">
-					<h3 className="booking-title">{installation}</h3>
+                    <div className="title-container">
+                        <h3 className="booking-title">{installation}</h3>
+                        {isToday && <span className="today-badge-inline">¡Hoy!</span>}
+                    </div>
+                    
 					<p className="booking-description">{details}</p>
 					<span className="booking-date">{buildDate(date)}</span>
                     <span>{status}</span>
 				</div>
+
 				{status !== 'Cancelada' && 
                 date && dateWithinOneHour(date) && 
-                    <div className='booking-cancel' onClick={() => {setIsModalOpen(true); setError(null)}}>
+                    <div className='booking-cancel' onClick={() => {setIsModalOpen(true); setError(null)}}
+                        title="Cancelar reserva">
                         &#10005;
                     </div>
                 }
-
-
-                
 
                 {isModalOpen && (
                 <div className="modal-overlay">

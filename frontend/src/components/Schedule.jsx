@@ -5,6 +5,7 @@ import { AuthContext } from "../auth/AuthContext";
 const Schedule = ({ value, onChange , date, installationId}) => {
     const [availableHours, setAvailableHours] = useState([]);
     const [everyHour, SetEveryHour] = useState([]);
+    const [userBookings, setUserBookings] = useState([]);
     
     const { user } = useContext(AuthContext);
 
@@ -24,7 +25,6 @@ const Schedule = ({ value, onChange , date, installationId}) => {
             }
         };
 
-
         const fetchEveryHours = async () => {
             try {
                 const response = await fetch(`/api/v1/installations/schedule/${installationId}/${date}`, {
@@ -38,9 +38,24 @@ const Schedule = ({ value, onChange , date, installationId}) => {
                 console.error("Error fetching data: ", error);
             }
         };
+
+        const fetchUserBookings = async () => {
+            try {
+                const response = await fetch(`/api/v1/${user.DNI}`, {
+                    headers: {
+                        'Authorization': `Token ${user.token}`
+                    }
+                });
+                const data = await response.json();
+                setUserBookings(data); // Guardar las reservas del usuario actual
+            } catch (error) {
+                console.error("Error fetching user bookings: ", error);
+            }
+        };
     
         fetchAvailableHours();
         fetchEveryHours();
+        fetchUserBookings()
         
     }, [date, installationId,user.token]);
     
