@@ -15,4 +15,4 @@ class Booking(models.Model):
     status = models.CharField(max_length=20, choices=BookingStatus.choices, default=BookingStatus.Scheduled)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
