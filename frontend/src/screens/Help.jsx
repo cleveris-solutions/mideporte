@@ -13,10 +13,19 @@ const Help = () => {
 
       <div className="help-manual">
         <h2>Manual de Usuario - ¿Cómo usar MiDeporte?</h2>
-        <p>Estamos trabajando en un manual detallado. Próximamente estará disponible aquí.</p>
-        <button className="download-button" disabled>
-          Ver Manual de Usuario
-        </button>
+        <p>Aquí tienes un vídeo que muestra las instrucciones para poder hacer reservas:</p>
+        <div className="video-container">
+          <iframe
+            width="100%"
+            height="600"
+            src="https://www.youtube.com/embed/lIt-rLgV6P0?si=baX0TJRzPL-hhWbs?controls=1&autoplay=0&rel=0&modestbranding=1"
+            title="Tutorial de YouTube"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+        
       </div>
 
       <Contacto />
